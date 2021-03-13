@@ -1,0 +1,9 @@
+make master folder
+npx create-react-app frontend
+move .gitignore from front to root
+change '/node_modules' to:
+  node_modules
+  node_modules/
+  ^this will make it so all node_modules folders will be ignored, since it will be in root and in back
+downloaded the 'Minty' theme from bootswatch
+installed react-bootstrap to front dependencies 
