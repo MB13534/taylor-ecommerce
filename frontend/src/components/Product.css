@@ -1,0 +1,13 @@
+.nwt {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+}
+
+.size__font {
+  font-size: 10px;
+}
+
+.name__font {
+  line-height: 1.2rem;
+}

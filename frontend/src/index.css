@@ -1,3 +1,11 @@
+:root {
+  --background-light: #f4f4f4;
+}
+
+body {
+  background-color: var(--background-light);
+}
+
 main {
-  min-height: 80vh;
+  margin-top: 70px;
 }
