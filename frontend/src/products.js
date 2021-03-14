@@ -13,7 +13,7 @@ const products = [
     subCategory: "",
     color: "Brown",
     subColor: "Green",
-    countInStock: 1,
+    countInStock: 0,
     images: [
       "https://di2ponv0v5otw.cloudfront.net/posts/2020/10/31/5f9e058f9e15598911b93818/s_5f9e05b5045e39864fb025bb.jpg",
       "https://di2ponv0v5otw.cloudfront.net/posts/2020/10/31/5f9e058f9e15598911b93818/s_5f9e05b6074d249aed0d69f8.jpg",

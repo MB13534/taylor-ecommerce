@@ -10,11 +10,8 @@ const ProductModal = (props) => {
     price,
     size,
     description,
-    category,
-    subCategory,
-    color,
-    subColor,
     _id: id,
+    countInStock,
   } = props.product;
 
   //add to cart button function
@@ -50,35 +47,46 @@ const ProductModal = (props) => {
             </Col>
             {/* right col */}
             <Col xs={12} lg={8}>
-              {/* brand */}
-              <h4>{brand}</h4>
+              {/* brand and nwt */}
+              <Container className="px-0 mb-3 d-flex justify-content-between align-items-center">
+                <h4 className="mb-0 text-dark">{brand}</h4>
+                {nwt && (
+                  <span className="badge badge-pill badge-primary">NWT</span>
+                )}
+              </Container>
               {/* description */}
               <p>{description}</p>
               {/* price and size */}
-              <div className="d-flex align-items-center justify-content-space-between">
-                <h3 className="d-inline">${price}</h3>
-                <h3 className="d-inline">
-                  <small>size</small>
-                  {size}
-                </h3>
-              </div>
+              <Container className="px-0 d-flex justify-content-between align-items-center">
+                <div className="d-flex align-items-center">
+                  <small className="text-uppercase mr-1">size</small>
+                  <h3 className="mb-0 d-flex align-items-center">
+                    <span className="badge badge-pill badge-primary">
+                      <strong>{size}</strong>
+                    </span>
+                  </h3>
+                </div>
+                <h3 className="mb-0">${price}</h3>
+              </Container>
             </Col>
           </Row>
         </Container>
       </Modal.Body>
 
       {/* buttons */}
-      <Modal.Footer>
+      <Modal.Footer className="justify-content-right">
         <LinkContainer to={`/products/${id}`}>
-          <Button className="mx-auto btn-lng">View Full Listing</Button>
+          <Button className="btn-lng">View Full Listing</Button>
         </LinkContainer>
 
         <Button
-          onClick={handleAddToCart}
+          type="button"
           variant="secondary"
-          className="mx-auto btn-lng"
+          className="btn-lng"
+          onClick={handleAddToCart}
+          disabled={countInStock < 1}
         >
-          Add to Cart
+          {countInStock < 1 ? "Out of Stock" : "Add to Cart"}
         </Button>
       </Modal.Footer>
     </Modal>

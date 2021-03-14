@@ -8,7 +8,16 @@ import "./Product.css";
 import ProductModal from "../components/ProductModal";
 
 const Product = ({ product }) => {
-  const { name, images, brand, nwt, size, price, _id: id } = product;
+  const {
+    name,
+    images,
+    brand,
+    nwt,
+    size,
+    price,
+    _id: id,
+    countInStock,
+  } = product;
   //local state to toggle viewing the quick view modal, gets passed to ProductModal
   const [modalShow, setModalShow] = useState(false);
 
@@ -43,7 +52,9 @@ const Product = ({ product }) => {
             <strong>${price}</strong>
           </Card.Text>
           <Card.Text as="div">
-            <small className="text-uppercase mr-1 size__font">size</small>
+            <small className="text-uppercase mr-1 size__font text-muted">
+              size
+            </small>
             <span className="badge badge-pill badge-primary">
               <strong>{size}</strong>
             </span>
@@ -59,7 +70,7 @@ const Product = ({ product }) => {
       {/* buttons */}
       <Card.Footer>
         <Button
-          className="btn-block"
+          className="btn-block btn-sm"
           variant="primary"
           onClick={() => setModalShow(true)}
         >
@@ -69,10 +80,11 @@ const Product = ({ product }) => {
         <Button
           type="button"
           variant="secondary"
-          className="btn-block"
+          className="btn-block btn-sm"
           onClick={handleAddToCart}
+          disabled={countInStock < 1}
         >
-          Add to Cart
+          {countInStock < 1 ? "Out of Stock" : "Add to Cart"}
         </Button>
       </Card.Footer>
 
