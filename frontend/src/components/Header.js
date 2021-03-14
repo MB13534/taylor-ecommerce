@@ -13,6 +13,7 @@ const Header = () => {
         expand="lg"
         collapseOnSelect
       >
+        {/* logo */}
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
@@ -22,6 +23,7 @@ const Header = () => {
             </Navbar.Brand>
           </LinkContainer>
 
+          {/* side/collapsable links */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {/* ml-auto or mr-auto adjusts the margin left or right (push links to right) */}

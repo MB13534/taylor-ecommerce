@@ -11,3 +11,12 @@
 .name__font {
   line-height: 1.2rem;
 }
+
+
+.product__image {
+  opacity: .85;
+}
+
+.product__image:hover {
+  opacity: 1;
+}

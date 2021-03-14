@@ -4,6 +4,7 @@ import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import products from "../products";
 
 const ProductScreen = ({ match }) => {
+  //match is the params from /:id, map through the products list and find the corresponding id and define to product, that will be displayed
   const product = products.find((product) => product._id === match.params.id);
 
   return (

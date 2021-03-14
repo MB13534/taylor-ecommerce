@@ -16,12 +16,11 @@ const App = () => {
   return (
     <Router>
       <Header />
-      {/* padding y axis 1rem */}
       <main className="py-3">
         <Container>
           <Route path="/" component={HomeScreen} exact />
           <Route path="/products" component={AllProductsScreen} exact />
-          <Route path="/product/:id" component={ProductScreen} />
+          <Route path="/products/:id" component={ProductScreen} />
           <Route path="/cart" component={CartScreen} exact />
           <Route path="/login" component={LoginScreen} exact />
         </Container>

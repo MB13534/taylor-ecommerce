@@ -10,7 +10,8 @@ const HomeScreen = () => {
     <>
       <h1>Latest Products</h1>
       <Row>
-        {products.map((product, index) => (
+        {/* renders all of the product carts in a grid format, each product goes in a col, already in a row */}
+        {products.map((product) => (
           <Col
             key={product._id}
             sm={12}
