@@ -18,7 +18,7 @@ const Header = () => {
           <LinkContainer to="/">
             <Navbar.Brand>
               <div className="header__logo">
-                Tailored by Tay<strong>Shopping</strong>
+                Tailored by Tay<strong>botique</strong>
               </div>
             </Navbar.Brand>
           </LinkContainer>
@@ -30,7 +30,7 @@ const Header = () => {
             <Nav className="ml-auto">
               <LinkContainer to="/products">
                 <Nav.Link>
-                  <i className="fas fa-tshirt mr-1"></i>View All
+                  <i className="fas fa-tshirt mr-1"></i>Browse Inventory
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/cart">
