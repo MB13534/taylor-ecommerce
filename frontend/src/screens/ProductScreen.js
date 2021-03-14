@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import {
   Row,
   Col,
-  Image,
+  // Image,
   ListGroup,
   Card,
   Button,
@@ -11,11 +11,14 @@ import {
 
 import products from "../products";
 
+//components
+import ControlledCarousel from "../components/ControlledCarousel";
+
 const ProductScreen = ({ match }) => {
   //match is the params from /:id, map through the products list and find the corresponding id and define to product, that will be displayed
   const product = products.find((product) => product._id === match.params.id);
   const {
-    images,
+    // images,
     name,
     nwt,
     brand,
@@ -45,8 +48,9 @@ const ProductScreen = ({ match }) => {
       <Row>
         {/* left col is picture, half of the row */}
         <Col md={12} lg={5}>
-          {/* image */}
-          <Image src={images[0]} alt={name} fluid className="w-100" />
+          {/* image carousel */}
+          <ControlledCarousel product={product} />
+          {/* <Image src={images[0]} alt={name} fluid className="w-100" /> */}
         </Col>
         {/* middle col is descriptions, one third of the row */}
         <Col md={12} lg={4}>
