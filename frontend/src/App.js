@@ -13,8 +13,11 @@ import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
 
 const App = () => {
+  //base url
+  const routerBaseName = process.env.PUBLIC_URL;
+
   return (
-    <Router>
+    <Router basename={routerBaseName}>
       <Header />
       <main className="py-3">
         <Container>
