@@ -70,7 +70,8 @@ const Product = ({ product }) => {
       {/* buttons */}
       <Card.Footer>
         <Button
-          className="btn-block btn-sm"
+          size="sm"
+          block
           variant="primary"
           onClick={() => setModalShow(true)}
         >
@@ -80,7 +81,8 @@ const Product = ({ product }) => {
         <Button
           type="button"
           variant="secondary"
-          className="btn-block btn-sm"
+          size="sm"
+          block
           onClick={handleAddToCart}
           disabled={countInStock < 1}
         >

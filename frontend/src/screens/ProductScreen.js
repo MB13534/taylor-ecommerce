@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom";
-import {
-  Row,
-  Col,
-  // Image,
-  ListGroup,
-  Card,
-  Button,
-  Container,
-} from "react-bootstrap";
+import { Row, Col, ListGroup, Card, Button, Container } from "react-bootstrap";
 
+//data
 import products from "../products";
 
 //components
@@ -18,7 +11,6 @@ const ProductScreen = ({ match }) => {
   //match is the params from /:id, map through the products list and find the corresponding id and define to product, that will be displayed
   const product = products.find((product) => product._id === match.params.id);
   const {
-    // images,
     name,
     nwt,
     brand,
@@ -120,7 +112,7 @@ const ProductScreen = ({ match }) => {
         </Col>
         {/* third col is add to cart */}
         <Col md={12} lg={3}>
-          <Card>
+          <Card className="shadow">
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <Row>

@@ -26,7 +26,6 @@ const Header = () => {
           {/* side/collapsable links */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            {/* ml-auto or mr-auto adjusts the margin left or right (push links to right) */}
             <Nav className="ml-auto">
               <LinkContainer to="/products">
                 <Nav.Link>

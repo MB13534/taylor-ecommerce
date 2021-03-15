@@ -2,15 +2,16 @@ import { Image, Carousel, Button } from "react-bootstrap";
 import { useState } from "react";
 
 const ControlledCarousel = ({ product }) => {
+  let { images, name } = product;
   //carousel is rendered when index changes
   const [imageIndex, setImageIndex] = useState(0);
-  let { images, name } = product;
 
   //removes any image with '' as field
   if (images) {
     images = images.filter((image) => image !== "");
   }
 
+  //previous button handle function, resets index when it completes loop
   const changeImageLeft = () => {
     if (imageIndex === 0) {
       setImageIndex(images.length - 1);
@@ -19,6 +20,7 @@ const ControlledCarousel = ({ product }) => {
     }
   };
 
+  //next button handle function, resets index when it completes loop
   const changeImageRight = () => {
     if (imageIndex === images.length - 1) {
       setImageIndex(0);
@@ -27,6 +29,7 @@ const ControlledCarousel = ({ product }) => {
     }
   };
 
+  //handles the index if user clicks on the tally to switch pictures
   const handleSelect = (selectedIndex, e) => {
     setImageIndex(selectedIndex);
   };
@@ -38,6 +41,7 @@ const ControlledCarousel = ({ product }) => {
         controls={false}
         onSelect={handleSelect}
       >
+        {/* maps through each image and loads the Carosel with the item and image */}
         {images.map((image, index) => (
           <Carousel.Item key={index}>
             <Image
@@ -49,6 +53,7 @@ const ControlledCarousel = ({ product }) => {
           </Carousel.Item>
         ))}
       </Carousel>
+      {/* custom buttons */}
       <div className="d-flex mt-2 mb-2">
         <Button variant="outline-dark" block onClick={() => changeImageLeft()}>
           Previous

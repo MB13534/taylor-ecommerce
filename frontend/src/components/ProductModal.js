@@ -76,13 +76,11 @@ const ProductModal = (props) => {
       {/* buttons */}
       <Modal.Footer className="justify-content-right">
         <LinkContainer to={`/products/${id}`}>
-          <Button className="btn-lng">View Full Listing</Button>
+          <Button>View Full Listing</Button>
         </LinkContainer>
 
         <Button
-          type="button"
           variant="secondary"
-          className="btn-lng"
           onClick={handleAddToCart}
           disabled={countInStock < 1}
         >

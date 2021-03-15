@@ -1,5 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 
+//data
 import products from "../products";
 
 //components
