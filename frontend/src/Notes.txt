@@ -19,3 +19,4 @@ the import syntax is ES modules (import react from 'react')
 export is (export default imports)
 
 proxy makes it so a front end axios call will look at localhost 5000 instead of 3000
+proxy gets added to front package, restart server
