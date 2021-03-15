@@ -7,3 +7,15 @@ change '/node_modules' to:
   ^this will make it so all node_modules folders will be ignored, since it will be in root and in back
 downloaded the 'Minty' theme from bootswatch
 installed react-bootstrap to front dependencies 
+
+create backend directory
+npm init in the root folder, install express
+
+server.js
+node js uses common js require syntax eg (const express = require('express'))
+module.exports = products;
+
+the import syntax is ES modules (import react from 'react')
+export is (export default imports)
+
+proxy makes it so a front end axios call will look at localhost 5000 instead of 3000

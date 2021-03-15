@@ -9437,6 +9437,6 @@ const products = [
   // images:["https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e531e75a815c3d17467.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e531e75a815c3d17406.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e541e75a815c3d174ec.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e551e75a815c3d17546.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e551e75a815c3d17599.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e561e75a815c3d175ed.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e561e75a815c3d17638.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e541e75a815c3d174a6.jpeg","","","","","","","",""]
 
   // }
-];
+]
 
-export default products;
+module.exports = products;
