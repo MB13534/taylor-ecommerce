@@ -20,3 +20,11 @@ export is (export default imports)
 
 proxy makes it so a front end axios call will look at localhost 5000 instead of 3000
 proxy gets added to front package, restart server
+
+the -D installs as dev
+npm i -D nodemon concurrently
+after installing nodemon make the scripts
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+you have to escape the quotes in dev

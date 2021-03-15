@@ -1,0 +1,159 @@
+/* #f3969a; */
+
+/* line 3, ../bunny/BunnyLoader.scss */
+body {
+  /* background: #e2b29f;
+  font-size: 120%; */
+  margin: auto auto;
+}
+
+/* line 8, ../bunny/BunnyLoader.scss */
+.rabbit {
+  width: 5em;
+  height: 3em;
+  background: #ffffff;
+  border-radius: 70% 90% 60% 50%;
+  position: relative;
+  box-shadow: -0.2em 1em 0 -0.75em #b78e81;
+  transform: rotate(0deg) translate(-2em, 0);
+  animation: hop 1s infinite linear;
+  z-index: 1;
+}
+
+.rabbit-background {
+  background: #f3969a;
+  height: 100px;
+  width: 100vw;
+  position: absolute;
+  top: 5px;
+}
+
+/* line 18, ../bunny/BunnyLoader.scss */
+.no-flexbox .rabbit {
+  margin: 10em auto 0;
+}
+
+/* line 20, ../bunny/BunnyLoader.scss */
+.rabbit:before {
+  content: "";
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  background: white;
+  border-radius: 100%;
+  top: 0.5em;
+  left: -0.3em;
+  box-shadow: 4em 0.4em 0 -0.35em #3f3334, 0.5em 1em 0 white, 4em 1em 0 -0.3em white, 4em 1em 0 -0.3em white, 4em 1em 0 -0.4em white;
+  animation: kick 1s infinite linear;
+}
+
+/* line 38, ../bunny/BunnyLoader.scss */
+.rabbit:after {
+  content: "";
+  position: absolute;
+  width: .75em;
+  height: 2em;
+  background: white;
+  border-radius: 50% 100% 0 0;
+  transform: rotate(-30deg);
+  right: 1em;
+  top: -1em;
+  border-top: 1px solid #f7f5f4;
+  border-left: 1px solid #f7f5f4;
+  box-shadow: -0.5em 0em 0 -0.1em white;
+}
+
+/* line 54, ../bunny/BunnyLoader.scss */
+.clouds {
+  background: white;
+  width: 2em;
+  height: 2em;
+  border-radius: 100% 100% 0 0;
+  position: relative;
+  top: -5em;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  transform: translate(0, 0);
+  animation: cloudy 1s infinite linear forwards;
+  box-shadow: 5em 2em 0 -0.3em white, -2em 2em 0 0 white;
+}
+
+/* line 65, ../bunny/BunnyLoader.scss */
+.clouds:before, .clouds:after {
+  content: '';
+  position: absolute;
+  box-shadow: 5em 2em 0 -0.3em white, -2em 2em 0 white;
+}
+
+/* line 70, ../bunny/BunnyLoader.scss */
+.clouds:before {
+  width: 1.25em;
+  height: 1.25em;
+  border-radius: 100% 100% 0 100%;
+  background: white;
+  left: -30%;
+  bottom: 0;
+}
+
+/* line 78, ../bunny/BunnyLoader.scss */
+.clouds:after {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 100% 100% 100% 0;
+  background: white;
+  right: -30%;
+  bottom: 0;
+}
+
+@keyframes hop {
+  20% {
+    transform: rotate(-10deg) translate(1em, -2em);
+    box-shadow: -0.2em 3em 0 -1em #b78e81;
+  }
+  40% {
+    transform: rotate(10deg) translate(3em, -4em);
+    box-shadow: -0.2em 3.25em 0 -1.1em #b78e81;
+  }
+  60%, 75% {
+    transform: rotate(0) translate(4em, 0);
+    box-shadow: -0.2em 1em 0 -0.75em #b78e81;
+  }
+}
+
+@keyframes kick {
+  20%, 50% {
+    box-shadow: 4em 0.4em 0 -0.35em #3f3334,
+ 0.5em 1.5em 0 white,
+ 4em 1.75em 0 -0.3em white,
+ 4em 1.75em 0 -0.3em white,
+ 4em 1.9em 0 -0.4em white;
+  }
+  40% {
+    box-shadow: 4em 0.4em 0 -0.35em #3f3334,
+ 0.5em 2em 0 white,
+ 4em 1.75em 0 -0.3em white,
+ 4.2em 1.75em 0 -0.2em white,
+ 4.4em 1.9em 0 -0.2em white;
+  }
+}
+
+@keyframes cloudy {
+  40% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
+    opacity: 0.75;
+    transform: translate(-3em, 0);
+  }
+  55% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    transform: translate(-4em, 0);
+  }
+  90% {
+
+    transform: translate(0, 0);
+  }
+}
+
+
+
+/*# sourceMappingURL=BunnyLoader.css.map */

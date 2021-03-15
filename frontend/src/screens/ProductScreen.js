@@ -17,7 +17,7 @@ const ProductScreen = ({ match }) => {
       setProduct(data);
     };
     fetchProduct();
-  }, []);
+  }, [match]);
 
   const {
     name,
@@ -39,12 +39,6 @@ const ProductScreen = ({ match }) => {
   const handleAddToCart = () => {
     console.log(`added ${id} to cart`);
   };
-
-  // {if(!product) {
-  //   Loading...
-  // } else {
-
-  // }}
 
   return (
     <>

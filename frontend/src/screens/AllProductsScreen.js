@@ -1,4 +1,5 @@
-import { Row, Col, Spinner } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import BunnyLoader from "../components/BunnyLoader";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -24,7 +25,7 @@ const HomeScreen = () => {
     cant just check for the array because it exists as []. */}
       {!products[0] ? (
         <div className="centered">
-          <Spinner animation="border" variant="secondary" />
+          <BunnyLoader />
         </div>
       ) : (
         <>
