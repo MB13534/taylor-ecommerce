@@ -1,25 +1,27 @@
-const express = require("express");
+import express from "express";
+import dotenv from "dotenv";
+//allows you to change colors of output to terminal
+import colors from "colors";
 
-//data
-const products = require("./data/products");
+import productRoutes from "./routes/productRoutes.js";
+import connectDB from "./config/db.js";
 
+dotenv.config();
+connectDB();
 const app = express();
-const PORT = 5000;
+
+//anything that comes to the route will be linked to productRoutes
+app.use("/api/products", productRoutes);
 
 //if port 5000 receives a get request to '/', respond with
 app.get("/", (req, res) => {
   res.send("API IS RUNNING");
 });
 
-//if port 5000 receives a get request to '/api/products', respond with all products
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
-
-//if port 5000 receives a get request to '/api/products/id', respond with that single product
-app.get("/api/products/:id", (req, res) => {
-  const product = products.find((product) => product._id === req.params.id);
-  res.json(product);
-});
-
-app.listen(PORT, console.log(`Server running on port ${PORT}`));
+const PORT = process.env.PORT || 5000;
+app.listen(
+  PORT,
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+  )
+);

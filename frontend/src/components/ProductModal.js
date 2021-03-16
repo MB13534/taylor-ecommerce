@@ -10,8 +10,8 @@ const ProductModal = (props) => {
     price,
     size,
     description,
-    _id: id,
     countInStock,
+    _id: id,
   } = props.product;
 
   //add to cart button function

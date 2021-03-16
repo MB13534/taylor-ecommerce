@@ -15,8 +15,8 @@ const Product = ({ product }) => {
     nwt,
     size,
     price,
-    _id: id,
     countInStock,
+    _id: id,
   } = product;
   //local state to toggle viewing the quick view modal, gets passed to ProductModal
   const [modalShow, setModalShow] = useState(false);

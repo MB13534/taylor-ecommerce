@@ -17,6 +17,7 @@ module.exports = products;
 
 the import syntax is ES modules (import react from 'react')
 export is (export default imports)
+add {"type": "module} in root package.json /// you must have .js
 
 proxy makes it so a front end axios call will look at localhost 5000 instead of 3000
 proxy gets added to front package, restart server
@@ -28,3 +29,7 @@ after installing nodemon make the scripts
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\""
 you have to escape the quotes in dev
+
+we use bcrypts, not bcrypt
+
+instead of putting a try catch in every call to the database, we use middleware called express-async-handler

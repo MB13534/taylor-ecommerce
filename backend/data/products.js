@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: "1",
     name: "41 Hawthorn knit textured sweater with buttons med",
     nwt: false,
     brand: "41 Hawthorn",
@@ -34,7 +33,6 @@ const products = [
     ],
   },
   {
-    _id: "2",
     name: "89th & Madison Stretch elastic waist grey pants 16",
     nwt: false,
     brand: "89th & Madison",
@@ -68,7 +66,6 @@ const products = [
     ],
   },
   {
-    _id: "3",
     name: "A New Day Seersucker ruffle sleeve tank top XXL",
     nwt: true,
     brand: "a new day",
@@ -102,7 +99,6 @@ const products = [
     ],
   },
   {
-    _id: "4",
     name: "A new day Tweed long boyfriend herringbone blazer",
     nwt: false,
     brand: "a new day",
@@ -136,7 +132,6 @@ const products = [
     ],
   },
   {
-    _id: "5",
     name: "A New Day leopard print button front cardigan XL",
     nwt: false,
     brand: "a new day",
@@ -170,7 +165,6 @@ const products = [
     ],
   },
   {
-    _id: "6",
     name: "Abercrombie & Fitch blue striped long sleeve top",
     nwt: false,
     brand: "Abercrombie & Fitch",
@@ -204,7 +198,6 @@ const products = [
     ],
   },
   {
-    _id: "7",
     name: "A&F denim western look skirt w/ frayed hem size 8",
     nwt: false,
     brand: "Abercrombie & Fitch",
@@ -238,7 +231,6 @@ const products = [
     ],
   },
   {
-    _id: "8",
     name: "Aerie chenille turtleneck oversize sweater small",
     nwt: false,
     brand: "aerie",
@@ -273,7 +265,6 @@ const products = [
   },
 
   {
-    _id: "9",
     name: "Alfani Bootcut petite dress pants black size 2P",
     nwt: false,
     brand: "Alfani",
@@ -308,7 +299,6 @@ const products = [
   },
 
   {
-    _id: "10",
     name: "Altar’d State Strappy block heel sandals size 8",
     nwt: false,
     brand: "Altar'd State",
@@ -342,7 +332,6 @@ const products = [
     ],
   },
   {
-    _id: "11",
     name: "Altar’d State Lace fit & flare creme ivory dress M",
     nwt: false,
     brand: "Altar'd State",
@@ -376,7 +365,6 @@ const products = [
     ],
   },
   {
-    _id: "12",
     name: "Alyx lightweight white embroidered boho blouse",
     nwt: false,
     brand: "Alyx",
@@ -9437,6 +9425,6 @@ const products = [
   // images:["https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e531e75a815c3d17467.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e531e75a815c3d17406.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e541e75a815c3d174ec.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e551e75a815c3d17546.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e551e75a815c3d17599.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e561e75a815c3d175ed.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e561e75a815c3d17638.jpeg","https://di2ponv0v5otw.cloudfront.net/posts/2020/09/15/5f617e531e75a815c3d17405/s_5f617e541e75a815c3d174a6.jpeg","","","","","","","",""]
 
   // }
-]
+];
 
-module.exports = products;
+export default products;
