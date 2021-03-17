@@ -37,6 +37,7 @@ const ControlledCarousel = ({ product }) => {
   return (
     <>
       <Carousel
+        fade
         activeIndex={imageIndex}
         controls={false}
         onSelect={handleSelect}

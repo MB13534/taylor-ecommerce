@@ -57,7 +57,7 @@ const productSchema = new mongoose.Schema({
 
 //create the model, first variable 'collection name' is SINGULAR, Mongoose will make plural
 //second variable is the schema
-const Product = mongoose.model("product", productSchema);
+const Product = mongoose.model("Product", productSchema);
 
 //export product model
 export default Product;

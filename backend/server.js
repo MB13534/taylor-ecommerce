@@ -6,12 +6,21 @@ import colors from "colors";
 import productRoutes from "./routes/productRoutes.js";
 import connectDB from "./config/db.js";
 
+//middleware
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+
 dotenv.config();
 connectDB();
 const app = express();
 
 //anything that comes to the route will be linked to productRoutes
 app.use("/api/products", productRoutes);
+
+//if the route was not found, respond with a 404 not found
+app.use(notFound);
+
+//overwriting the default error handler
+app.use(errorHandler);
 
 //if port 5000 receives a get request to '/', respond with
 app.get("/", (req, res) => {

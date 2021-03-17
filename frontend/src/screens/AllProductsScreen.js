@@ -1,32 +1,39 @@
 import { Row, Col } from "react-bootstrap";
-import BunnyLoader from "../components/BunnyLoader";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+//useDispatch is used to get access to call actions, useSelector gets access to state
+import { useDispatch, useSelector } from "react-redux";
+
+//actions
+import { listProducts } from "../actions/productActions";
 
 //components
 import Product from "../components/Product";
+import BunnyLoader from "../components/BunnyLoader";
 
 const HomeScreen = () => {
-  const [products, setProducts] = useState([]);
+  //to use disatch you must define and call it
+  const dispatch = useDispatch();
 
-  //use effect cannot be async. Define function that is async and then immediatly call it
+  //this needs to match what it is called in the store(key), to access state
+  //useSelector takes in state and returns what portion of the state we want. THen you can deconstruct it
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products } = productList;
+
   //useEffect takes a list of dependencies, it will fire off whenever any of those dependencies changes
   useEffect(() => {
-    const fetchProducts = async () => {
-      const { data } = await axios.get("/api/products");
-      setProducts(data);
-    };
-    fetchProducts();
-  }, []);
+    //fire off the listProducts action creator to fetch all the products
+    dispatch(listProducts());
+  }, [dispatch]);
 
   return (
     <>
-      {/* check to see if products array has an element, render if it does
-    cant just check for the array because it exists as []. */}
-      {!products[0] ? (
+      {/* check the loading state to, loading icon if its loading, , check for error and render all the product cards if it is not */}
+      {loading ? (
         <div className="centered">
           <BunnyLoader />
         </div>
+      ) : error ? (
+        <h3>{error}</h3>
       ) : (
         <>
           <h1>Latest Products</h1>

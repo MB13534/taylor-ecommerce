@@ -33,3 +33,10 @@ you have to escape the quotes in dev
 we use bcrypts, not bcrypt
 
 instead of putting a try catch in every call to the database, we use middleware called express-async-handler
+
+middleware is a wrapped that can have access to all of the request response info.
+it is defined in app.use((req, res, next) => {
+  middleware
+  next()
+})
+you call next to go to the next middleware

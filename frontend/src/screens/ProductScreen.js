@@ -31,10 +31,9 @@ const ProductScreen = ({ match }) => {
     subCategory,
     color,
     subColor,
-    // _id: id,
+    _id: id,
     countInStock,
   } = product;
-  const id = product.id;
 
   //add to cart button function
   const handleAddToCart = () => {

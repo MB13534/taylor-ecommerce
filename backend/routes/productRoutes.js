@@ -2,7 +2,7 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 
 //mongoose will call to fetch the products
-import Product from "../models/productModel";
+import Product from "../models/productModel.js";
 
 //handles various incoming routes
 const router = express.Router();
@@ -37,8 +37,9 @@ router.get(
       //respond with product
       res.json(product);
     } else {
-      //if the product is not found, respond with a not found error (404)
-      res.status(404).json({ message: "Product not found " });
+      //if the product is not found and the id is a correct format (just not in DB), respond with a not found error (404)
+      res.status(404);
+      throw new Error("Product not found");
     }
   })
 );
