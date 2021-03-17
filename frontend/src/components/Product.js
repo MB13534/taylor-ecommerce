@@ -1,6 +1,6 @@
 import { Card, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import "./Product.css";
@@ -11,8 +11,11 @@ import ProductModal from "../components/ProductModal";
 //actions
 import { addToCart } from "../actions/cartActions";
 
-const Product = ({ product }) => {
-  const dispatch = useDispatch();
+const Product = (props) => {
+  //local state to toggle viewing the quick view modal, gets passed to ProductModal
+  const [modalShow, setModalShow] = useState(false);
+  //local state to toggle if the quick add button was pressed
+  const [buttonPressed, setButtonPressed] = useState(false);
 
   const {
     name,
@@ -23,21 +26,26 @@ const Product = ({ product }) => {
     price,
     countInStock,
     _id: id,
-  } = product;
-  //local state to toggle viewing the quick view modal, gets passed to ProductModal
-  const [modalShow, setModalShow] = useState(false);
-  //local state to toggle if the quick add button was pressed
-  const [buttonPressed, setButtonPressed] = useState(false);
+  } = props.product;
 
-  //helped function to pass to Modal
-  const setModalShowFalse = () => {
-    setModalShow(false);
-  };
-
+  const dispatch = useDispatch();
   //add to cart button function
   const handleAddToCart = () => {
     setButtonPressed(true);
     dispatch(addToCart(id, 1));
+  };
+
+  //checks to see if the current item is already in the cart, if it is, the cart button will default to true
+  const existItem = props.cartItems.find((cartItem) => cartItem.product === id);
+  useEffect(() => {
+    if (existItem) {
+      setButtonPressed(true);
+    }
+  }, [existItem]);
+
+  //helper function to pass to Modal
+  const setModalShowFalse = () => {
+    setModalShow(false);
   };
 
   return (
@@ -102,7 +110,7 @@ const Product = ({ product }) => {
         >
           {/* if the button gets pressed, it is disabled and says Card Quantity x1 */}
           {buttonPressed
-            ? "Cart Quantity x1"
+            ? "Item in Cart"
             : countInStock < 1
             ? "Out of Stock"
             : "Quick Add to Cart"}
@@ -113,7 +121,7 @@ const Product = ({ product }) => {
       <ProductModal
         show={modalShow}
         onHide={setModalShowFalse}
-        product={product}
+        product={props.product}
         handleAddToCart={handleAddToCart}
         buttonPressed={buttonPressed}
       />

@@ -83,7 +83,7 @@ const ProductModal = (props) => {
           disabled={countInStock < 1 || props.buttonPressed}
         >
           {props.buttonPressed
-            ? "Cart Quantity x1"
+            ? "Item in Cart"
             : countInStock < 1
             ? "Out of Stock"
             : "Quick Add to Cart"}

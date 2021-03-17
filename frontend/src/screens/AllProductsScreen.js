@@ -22,6 +22,10 @@ const HomeScreen = () => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
+  //this will be used when rendering each product, so it knows if the quick add button should start as pressed or not
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
   //useEffect takes a list of dependencies, it will fire off whenever any of those dependencies changes
   useEffect(() => {
     //fire off the listProducts action creator to fetch all the products
@@ -55,7 +59,7 @@ const HomeScreen = () => {
                 xl={3}
                 className="d-flex justify-content-center align-self-stretch"
               >
-                <Product product={product} />
+                <Product product={product} cartItems={cartItems} />
               </Col>
             ))}
           </Row>
