@@ -3,12 +3,15 @@ import { useEffect } from "react";
 //useDispatch is used to get access to call actions, useSelector gets access to state
 import { useDispatch, useSelector } from "react-redux";
 
+import Loader from "../components/Loader";
+
 //actions
 import { listProducts } from "../actions/productActions";
 
 //components
 import Product from "../components/Product";
 import BunnyLoader from "../components/BunnyLoader";
+import Message from "../components/Message";
 
 const HomeScreen = () => {
   //to use disatch you must define and call it
@@ -29,11 +32,15 @@ const HomeScreen = () => {
     <>
       {/* check the loading state to, loading icon if its loading, , check for error and render all the product cards if it is not */}
       {loading ? (
+        //<Loader />
         <div className="centered">
           <BunnyLoader />
         </div>
       ) : error ? (
-        <h3>{error}</h3>
+        //danger is red because it is an error
+        <Message variant="danger">
+          <h3>{error}</h3>
+        </Message>
       ) : (
         <>
           <h1>Latest Products</h1>

@@ -17,7 +17,6 @@ router.get(
   asyncHandler(async (req, res) => {
     //empty object gives us everything as a promise, therefore make it async await
     const products = await Product.find({});
-
     //respond with all products
     res.json(products);
   })
@@ -26,7 +25,7 @@ router.get(
 // @desc      Fetch single product
 // @route     GET /api/products/:id
 // @access    public
-//if port 5000 receives a get request to '//id', respond with that single product
+//if port 5000 receives a get request to '/:id', respond with that single product
 router.get(
   "/:id",
   asyncHandler(async (req, res) => {
