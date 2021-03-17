@@ -86,7 +86,7 @@ const Product = ({ product }) => {
           onClick={handleAddToCart}
           disabled={countInStock < 1}
         >
-          {countInStock < 1 ? "Out of Stock" : "Add to Cart"}
+          {countInStock < 1 ? "Out of Stock" : "Quick Add to Cart"}
         </Button>
       </Card.Footer>
 

@@ -40,3 +40,12 @@ it is defined in app.use((req, res, next) => {
   next()
 })
 you call next to go to the next middleware
+
+creating a new state
+1. create constants
+2. create reducer
+3. update store
+4. create action creator
+5. useDispatch
+6. useSelector
+7. finish logic
