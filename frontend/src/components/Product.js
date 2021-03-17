@@ -1,13 +1,19 @@
 import { Card, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import "./Product.css";
 
 //components
 import ProductModal from "../components/ProductModal";
 
+//actions
+import { addToCart } from "../actions/cartActions";
+
 const Product = ({ product }) => {
+  const dispatch = useDispatch();
+
   const {
     name,
     images,
@@ -20,10 +26,18 @@ const Product = ({ product }) => {
   } = product;
   //local state to toggle viewing the quick view modal, gets passed to ProductModal
   const [modalShow, setModalShow] = useState(false);
+  //local state to toggle if the quick add button was pressed
+  const [buttonPressed, setButtonPressed] = useState(false);
+
+  //helped function to pass to Modal
+  const setModalShowFalse = () => {
+    setModalShow(false);
+  };
 
   //add to cart button function
   const handleAddToCart = () => {
-    console.log(`added ${id} to cart`);
+    setButtonPressed(true);
+    dispatch(addToCart(id, 1));
   };
 
   return (
@@ -83,18 +97,25 @@ const Product = ({ product }) => {
           variant="secondary"
           size="sm"
           block
-          onClick={handleAddToCart}
-          disabled={countInStock < 1}
+          onClick={() => handleAddToCart()}
+          disabled={countInStock < 1 || buttonPressed}
         >
-          {countInStock < 1 ? "Out of Stock" : "Quick Add to Cart"}
+          {/* if the button gets pressed, it is disabled and says Card Quantity x1 */}
+          {buttonPressed
+            ? "Cart Quantity x1"
+            : countInStock < 1
+            ? "Out of Stock"
+            : "Quick Add to Cart"}
         </Button>
       </Card.Footer>
 
       {/* modal, modalShow is the boolean which is toggled by setModalShow */}
       <ProductModal
         show={modalShow}
-        onHide={() => setModalShow(false)}
+        onHide={setModalShowFalse}
         product={product}
+        handleAddToCart={handleAddToCart}
+        buttonPressed={buttonPressed}
       />
     </Card>
   );

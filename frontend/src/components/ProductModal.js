@@ -14,15 +14,12 @@ const ProductModal = (props) => {
     _id: id,
   } = props.product;
 
-  //add to cart button function
-  const handleAddToCart = () => {
-    console.log(`added ${id} to cart`);
-  };
-
   return (
     //basic modal properties
     <Modal
-      {...props}
+      // {...props}
+      show={props.show}
+      onHide={props.onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -80,11 +77,16 @@ const ProductModal = (props) => {
         </LinkContainer>
 
         <Button
+          type="button"
           variant="secondary"
-          onClick={handleAddToCart}
-          disabled={countInStock < 1}
+          onClick={() => props.handleAddToCart()}
+          disabled={countInStock < 1 || props.buttonPressed}
         >
-          {countInStock < 1 ? "Out of Stock" : "Add to Cart"}
+          {props.buttonPressed
+            ? "Cart Quantity x1"
+            : countInStock < 1
+            ? "Out of Stock"
+            : "Quick Add to Cart"}
         </Button>
       </Modal.Footer>
     </Modal>
