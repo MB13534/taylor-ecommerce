@@ -24,7 +24,8 @@ const App = () => {
           <Route path="/" component={HomeScreen} exact />
           <Route path="/products" component={AllProductsScreen} exact />
           <Route path="/products/:id" component={ProductScreen} />
-          <Route path="/cart" component={CartScreen} exact />
+          {/* the ? makes the id optional */}
+          <Route path="/cart/:id?" component={CartScreen} exact />
           <Route path="/login" component={LoginScreen} exact />
         </Container>
       </main>

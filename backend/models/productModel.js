@@ -41,6 +41,7 @@ const productSchema = new mongoose.Schema({
   },
   color: {
     type: String,
+    required: true,
   },
   subColor: {
     type: String,
@@ -48,6 +49,7 @@ const productSchema = new mongoose.Schema({
   countInStock: {
     type: Number,
     required: true,
+    default: 1,
   },
   images: {
     type: Array,

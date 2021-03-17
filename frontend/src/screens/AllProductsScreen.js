@@ -3,7 +3,7 @@ import { useEffect } from "react";
 //useDispatch is used to get access to call actions, useSelector gets access to state
 import { useDispatch, useSelector } from "react-redux";
 
-import Loader from "../components/Loader";
+// import Loader from "../components/Loader";
 
 //actions
 import { listProducts } from "../actions/productActions";

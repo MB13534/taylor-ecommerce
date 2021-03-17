@@ -51,7 +51,7 @@ const Product = ({ product }) => {
           <Card.Text as="div">
             <strong>${price}</strong>
           </Card.Text>
-          <Card.Text as="div">
+          <Card.Text as="div" className="d-flex align-items-center">
             <small className="text-uppercase mr-1 size__font text-muted">
               size
             </small>

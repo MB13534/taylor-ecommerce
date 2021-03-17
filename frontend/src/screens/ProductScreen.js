@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
-import { Row, Col, ListGroup, Card, Button, Container } from "react-bootstrap";
-import { useEffect } from "react";
+import {
+  Row,
+  Col,
+  ListGroup,
+  Card,
+  Button,
+  Container,
+  Form,
+} from "react-bootstrap";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //components
@@ -10,7 +18,10 @@ import Message from "../components/Message";
 //action creators
 import { listProductDetails } from "../actions/productActions";
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ match, history }) => {
+  //component level state for qty. this is how many items the user selects in the drop down
+  const [qty, setQty] = useState(1);
+
   //dispatch will give us access to action creators
   const dispatch = useDispatch();
 
@@ -32,7 +43,8 @@ const ProductScreen = ({ match }) => {
 
   //add to cart button function
   const handleAddToCart = () => {
-    console.log(`added ${product._id} to cart`);
+    //bring the user to the cart page and put the id in the route, also add the qty selected as a query parameter
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
   return (
@@ -51,6 +63,7 @@ const ProductScreen = ({ match }) => {
           {/* left col is picture, half of the row */}
           <Col md={12} lg={5}>
             {/* image carousel */}
+            {/* checks to make sure there are images to load into the carousel(during inilitization) */}
             {loading === false && <ControlledCarousel product={product} />}
             {/* <Image src={images[0]} alt={name} fluid className="w-100" /> */}
           </Col>
@@ -139,7 +152,7 @@ const ProductScreen = ({ match }) => {
                     <Col>
                       <strong>Status:</strong>
                     </Col>
-                    <Col>
+                    <Col className="d-flex align-items-center">
                       {product.countInStock > 0 ? (
                         <span className="badge badge-primary">In Stock</span>
                       ) : (
@@ -148,6 +161,31 @@ const ProductScreen = ({ match }) => {
                     </Col>
                   </Row>
                 </ListGroup.Item>
+                {/* if the item is in stock, show the qty and selection form */}
+                {product.countInStock > 0 && (
+                  <ListGroup.Item>
+                    <Row className="d-flex align-items-center">
+                      <Col>
+                        <strong>Qty</strong>
+                      </Col>
+                      <Col>
+                        <Form.Control
+                          as="select"
+                          value={qty}
+                          onChange={(e) => setQty(e.target.value)}
+                        >
+                          {/* this will give us an array counting up to keys. If the qty was 4, the array would be [0, 1, 2, 3] */}
+                          {[...Array(product.countInStock).keys()].map((x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))}
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
+                {/* add to cart button */}
                 <ListGroup.Item>
                   <Button
                     type="button"
