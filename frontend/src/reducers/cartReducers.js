@@ -1,6 +1,6 @@
-import { CART_ADD_ITEM } from "../constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants";
 
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducers = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
       //the payload will have the product id called 'product'
@@ -24,6 +24,13 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         //spread all of current state, and update cartItems to all of current cartItems plus the new item
         return { ...state, cartItems: [...state.cartItems, item] };
       }
+    case CART_REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(
+          (cartItem) => cartItem.product !== action.payload
+        ),
+      };
 
     default:
       return state;
