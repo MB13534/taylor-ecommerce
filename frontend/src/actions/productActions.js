@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//constants
 import {
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
