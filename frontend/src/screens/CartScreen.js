@@ -59,7 +59,7 @@ const CartScreen = ({ history }) => {
                   {/* pic, name, size, price, qty, delete */}
                   <Row className="align-items-center">
                     {/* name */}
-                    <Col md={4} xs={12}>
+                    <Col md={4} xs={12} className="mb-2">
                       <Link to={`/products/${item.product}`}>{item.name}</Link>
                     </Col>
                     {/* image */}
