@@ -17,6 +17,7 @@ import Message from "../components/Message";
 
 //action creators
 import { listProductDetails } from "../actions/productActions";
+import { addToCart } from "../actions/cartActions";
 
 const ProductScreen = ({ match, history }) => {
   //component level state for qty. this is how many items the user selects in the drop down
@@ -43,8 +44,9 @@ const ProductScreen = ({ match, history }) => {
 
   //add to cart button function
   const handleAddToCart = () => {
-    //bring the user to the cart page and put the id in the route, also add the qty selected as a query parameter
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    dispatch(addToCart(product._id, qty));
+    //bring the user to the cart page
+    history.push("/cart");
   };
 
   return (
