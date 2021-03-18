@@ -4,6 +4,9 @@ import asyncHandler from "express-async-handler";
 //mongoose will call to fetch the products
 import User from "../models/userModel.js";
 
+//generate token function
+import generateToken from "../utils/generateToken.js";
+
 // @desc      Auth user & get token
 // @route     POST /api/users/login
 // @access    public
@@ -20,7 +23,8 @@ export const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: null,
+      //create token
+      token: generateToken(user._id),
     });
   } else {
     res.status(401);

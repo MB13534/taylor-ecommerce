@@ -39,7 +39,7 @@ const ProductModal = (props) => {
                 src={images[0]}
                 alt={name}
                 fluid
-                className="d-block mx-auto w-100"
+                className="d-block mx-auto w-100 rounded"
               />
             </Col>
             {/* right col */}

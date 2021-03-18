@@ -51,3 +51,5 @@ creating a new state
 7. finish logic
 
 to get into from the body, add bodyParser // app.use(express.json()) at server.js
+
+jsonwebtoken is what we use to generate the tokens

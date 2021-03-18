@@ -55,7 +55,7 @@ const Product = (props) => {
         <Card.Img
           src={images[0]}
           variant="top"
-          className="position-relative product__image"
+          className="position-relative product__image rounded"
         />
       </Link>
       {nwt && <span className="nwt badge badge-pill badge-primary">NWT</span>}
