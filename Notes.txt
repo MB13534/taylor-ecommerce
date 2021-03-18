@@ -49,3 +49,5 @@ creating a new state
 5. useDispatch
 6. useSelector
 7. finish logic
+
+to get into from the body, add bodyParser // app.use(express.json()) at server.js

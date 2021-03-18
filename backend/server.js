@@ -3,7 +3,10 @@ import dotenv from "dotenv";
 //allows you to change colors of output to terminal
 import colors from "colors";
 
+//routes
 import productRoutes from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+
 import connectDB from "./config/db.js";
 
 //middleware
@@ -13,8 +16,14 @@ dotenv.config();
 connectDB();
 const app = express();
 
+//this will allow us to accept json data in the body
+app.use(express.json());
+
 //anything that comes to the route will be linked to productRoutes
 app.use("/api/products", productRoutes);
+
+//anything that comes to the route will be linked to userRoutes
+app.use("/api/users", userRoutes);
 
 //if the route was not found, respond with a 404 not found
 app.use(notFound);
