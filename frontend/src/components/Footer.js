@@ -1,8 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap";
 
+import "./Footer.css";
+
 const Footer = () => {
   return (
-    <div>
+    <footer>
       <Container>
         <Row>
           <Col className="text-center py-3">&copy; Tay</Col>
@@ -21,7 +23,7 @@ const Footer = () => {
           </Col>
         </Row>
       </Container>
-    </div>
+    </footer>
   );
 };
 

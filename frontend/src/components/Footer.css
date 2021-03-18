@@ -1,0 +1,17 @@
+footer {
+  background-color: var(--primary);
+  color: white;
+}
+/* 
+footer a:link,
+a:visited {
+  color: white;
+} */
+
+footer strong {
+  color: white;
+}
+
+footer strong:hover {
+  color: white;
+}

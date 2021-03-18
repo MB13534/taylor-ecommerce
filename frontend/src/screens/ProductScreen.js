@@ -51,7 +51,7 @@ const ProductScreen = ({ match, history }) => {
     <>
       {/* back button */}
       <Link to="/products" className="btn btn-outline-secondary mb-3">
-        Go Back
+        Go Back to the Shop
       </Link>
       {/* check to see if the item is still loading, check for error, if not, render the product */}
       {loading ? null : error ? (
@@ -143,7 +143,7 @@ const ProductScreen = ({ match, history }) => {
                       <strong>Price:</strong>
                     </Col>
                     <Col>
-                      <strong>${product.price}</strong>
+                      <strong className="text-dark">${product.price}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>

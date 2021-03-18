@@ -9,9 +9,8 @@ body {
 
 main {
   margin-top: 70px;
-  min-height: 70vh;
+  min-height: 90vh;
 }
-
 
 .centered {
   position: fixed;

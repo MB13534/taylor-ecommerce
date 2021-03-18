@@ -50,16 +50,19 @@ const CartScreen = ({ match, location, history }) => {
     history.push("/login?redirect=shipping");
   };
 
+  //helper that returns how many items are in the cart
+  const itemsInCart = cartItems.reduce((acc, item) => acc + item.qty, 0);
+
   return (
     <>
       <Link to="/products" className="btn btn-outline-secondary mb-3">
-        Go Back
+        Go Back to the Shop
       </Link>
 
       <Row>
         {/* checks to see if cart is empty, if it is, back button, else, render cart items */}
-        <Col md={8}>
-          {cartItems === 0 ? (
+        <Col lg={8} xs={12} className="mb-3">
+          {cartItems.length === 0 ? (
             <div>
               <Message>Your Cart is Empty</Message>
             </div>
@@ -70,7 +73,12 @@ const CartScreen = ({ match, location, history }) => {
                 <ListGroup.Item key={item.product}>
                   {/* pic, name, size, price, qty, delete */}
                   <Row className="align-items-center">
-                    <Col md={2}>
+                    {/* name */}
+                    <Col md={4} xs={12}>
+                      <Link to={`/products/${item.product}`}>{item.name}</Link>
+                    </Col>
+                    {/* image */}
+                    <Col md={2} sm={5} xs={4} className="cart__image">
                       <Link to={`/products/${item.product}`}>
                         <Image
                           src={item.images[0]}
@@ -80,12 +88,10 @@ const CartScreen = ({ match, location, history }) => {
                         />
                       </Link>
                     </Col>
-                    <Col md={4}>
-                      <Link to={`/products/${item.product}`}>{item.name}</Link>
-                    </Col>
-                    <Col md={2}>size {item.size}</Col>
-                    <Col md={1}>${item.price}</Col>
-                    <Col md={2}>
+                    {/* size, price, form */}
+                    <Col xs={2}>size {item.size}</Col>
+                    <Col xs={1}>${item.price}</Col>
+                    <Col sm={2} xs={3}>
                       <Form.Control
                         as="select"
                         value={item.qty}
@@ -103,7 +109,8 @@ const CartScreen = ({ match, location, history }) => {
                         ))}
                       </Form.Control>
                     </Col>
-                    <Col md={1}>
+                    {/* delete button */}
+                    <Col md={1} xs={2}>
                       <Button
                         type="button"
                         variant="light"
@@ -118,22 +125,23 @@ const CartScreen = ({ match, location, history }) => {
             </ListGroup>
           )}
         </Col>
-        <Col md={4}>
-          <Card>
+        <Col lg={4} xs={12}>
+          <Card className="shadow">
             <ListGroup variant="flush">
               <ListGroup.Item>
                 {/* shows how many items in cart, loop through cart and the items quantity to the accum */}
                 <h3>
-                  Subtotal (
-                  <strong>
-                    {cartItems.reduce((acc, item) => acc + item.qty, 0)}
-                  </strong>
-                  ) items
+                  Subtotal (<strong>{itemsInCart}</strong>){" "}
+                  {/* if there is only one item, singular, else, plural */}
+                  {itemsInCart === 1 ? "item" : "items"}
                 </h3>
-                {/* whos the total price to fixed 2 digits */}$
-                {cartItems
-                  .reduce((acc, item) => acc + item.qty * item.price, 0)
-                  .toFixed(2)}
+                {/* whos the total price to fixed 2 digits */}
+                <h4 className="mb-0">
+                  $
+                  {cartItems
+                    .reduce((acc, item) => acc + item.qty * item.price, 0)
+                    .toFixed(2)}
+                </h4>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
