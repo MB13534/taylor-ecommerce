@@ -7,7 +7,7 @@ import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
 
 //actions
-import { getUserDetails } from "../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../actions/userActions";
 
 const ProfileScreen = ({ location, history }) => {
   //component state that will hold the name, email and password
@@ -24,6 +24,10 @@ const ProfileScreen = ({ location, history }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  //gets the success value if the profile update was successful, nothing if not, this is used for a notification confirmation message for the user
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
 
   //if the user is already logged in, then apply a redirect so they do not see the login screen again
   //they would head directly to the shipping page if they are already logged in
@@ -49,7 +53,7 @@ const ProfileScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-      ///DISPATCH UPDATE PROFILE
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
   };
 
@@ -60,6 +64,8 @@ const ProfileScreen = ({ location, history }) => {
         {/* error message that pops up if the passwords do not match */}
         {message && <Message variant="danger">{message}</Message>}
         {/* check to see if the action is still loading or has an error  */}
+        {success && <Message variant="success">Profile Updated</Message>}
+        {/* check to see if the profile update was successful  */}
         {error && <Message variant="danger">{error}</Message>}
         {loading && <BunnyLoader />}
         <Form onSubmit={submitHandler}>

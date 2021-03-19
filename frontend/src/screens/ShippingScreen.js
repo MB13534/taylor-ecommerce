@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 //components
 import FormContainer from "../components/FormContainer";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 //actions
 import { saveShippingAddress } from "../actions/cartActions";
@@ -32,6 +33,8 @@ const ShippingScreen = ({ history }) => {
 
   return (
     <FormContainer>
+      {/* shows the progress steps, need to send props that represent current progress, this is step2 */}
+      <CheckoutSteps step1 step2 />
       <h1>Shipping</h1>
       <Form onSubmit={handleSubmit}>
         {/* address */}
