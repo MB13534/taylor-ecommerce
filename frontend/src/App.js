@@ -11,6 +11,7 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 
 const App = () => {
   //base url
@@ -22,6 +23,7 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Route path="/login" component={LoginScreen} exact />
+          <Route path="/register" component={RegisterScreen} exact />
           <Route path="/products" component={AllProductsScreen} exact />
           <Route path="/products/:id" component={ProductScreen} />
           {/* the ? makes the id optional */}

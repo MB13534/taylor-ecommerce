@@ -5,6 +5,7 @@ import {
   authUser,
   registerUser,
   getUserProfile,
+  updateUserProfile,
 } from "../controllers/userController.js";
 
 //middleware, protects the route from unauthorized access
@@ -23,6 +24,9 @@ router.route("/").post(registerUser);
 
 //use route when you need to handle multiple types of requests, ie get, put, post
 //in order to protect or limit access to a route, we wrap the middleware that we made called protect as the first argument
-router.route("/profile").get(protect, getUserProfile);
+router
+  .route("/profile")
+  .get(protect, getUserProfile)
+  .put(protect, updateUserProfile);
 
 export default router;

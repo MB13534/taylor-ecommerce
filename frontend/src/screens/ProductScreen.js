@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 //components
 import ControlledCarousel from "../components/ControlledCarousel";
 import Message from "../components/Message";
+import BunnyLoader from '../components/BunnyLoader'
 
 //action creators
 import { listProductDetails } from "../actions/productActions";
@@ -56,7 +57,7 @@ const ProductScreen = ({ match, history }) => {
         Go Back to the Shop
       </Link>
       {/* check to see if the item is still loading, check for error, if not, render the product */}
-      {loading ? null : error ? (
+      {loading ? <BunnyLoader /> : error ? (
         <Message variant="danger">
           <h3>{error}</h3>
         </Message>
