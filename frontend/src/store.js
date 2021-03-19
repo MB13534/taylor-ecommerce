@@ -8,7 +8,11 @@ import {
   productDetailsReducer,
 } from "./reducers/productReducers";
 import { cartReducers } from "./reducers/cartReducers";
-import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
+import {
+  userLoginReducer,
+  userRegisterReducer,
+  userDetailsReducer,
+} from "./reducers/userReducers";
 
 //takes object of all of the imported reducers
 const reducer = combineReducers({
@@ -18,6 +22,7 @@ const reducer = combineReducers({
   cart: cartReducers,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userDetails: userDetailsReducer,
 });
 
 //upon inilization it will check local storage to see if there are any cartItems, if there is, it adds it to our initial state, otherwise it sets it as empty array
@@ -30,9 +35,15 @@ const userInfoFromLocalStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
+//upon inilization it will check local storage to see if there is any shippingInfo, if there is, it adds it to our initial state, otherwise it sets it as empty object
+const shippingAddressFromLocalStorage = localStorage.getItem("shippingAddress")
+  ? JSON.parse(localStorage.getItem("shippingAddress"))
+  : {};
+
 const initialState = {
   cart: {
     cartItems: cartItemsFromLocalStorage,
+    shippingAddress: shippingAddressFromLocalStorage,
   },
   userLogin: {
     userInfo: userInfoFromLocalStorage,

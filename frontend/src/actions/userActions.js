@@ -9,6 +9,10 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+  USER_DETAILS_FAIL,
+  USER_DETAILS_RESET,
 } from "../constants/userConstants";
 
 export const login = (email, password) => async (dispatch) => {
@@ -51,6 +55,7 @@ export const logout = () => (dispatch) => {
   //remove from local storage
   localStorage.removeItem("userInfo");
   //call reducer to update state
+  dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: USER_LOGOUT });
 };
 
@@ -89,6 +94,44 @@ export const register = (name, email, password) => async (dispatch) => {
     //if there is an error
     dispatch({
       type: USER_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getUserDetails = (id) => async (dispatch, getState) => {
+  try {
+    //dispatch to reducer to change state to loading
+    dispatch({ type: USER_DETAILS_REQUEST });
+
+    //destructure two levels of getState function
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    //we must create a config object because when we send data we need to send a content type of application/json
+    //the token comes from the getState destructure
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    //first argument is url, second is config
+    const { data } = await axios.get(`/api/users/${id}`, config);
+    //send off to reducer to update state
+    dispatch({
+      type: USER_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    //if there is an error
+    dispatch({
+      type: USER_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
