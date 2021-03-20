@@ -6,6 +6,7 @@ import colors from "colors";
 //routes
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 import connectDB from "./config/db.js";
 
@@ -24,6 +25,9 @@ app.use("/api/products", productRoutes);
 
 //anything that comes to the route will be linked to userRoutes
 app.use("/api/users", userRoutes);
+
+//anything that comes to the route will be linked to orderRoutes
+app.use("/api/orders", orderRoutes);
 
 //if the route was not found, respond with a 404 not found
 app.use(notFound);

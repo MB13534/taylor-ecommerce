@@ -53,3 +53,92 @@ creating a new state
 to get into from the body, add bodyParser // app.use(express.json()) at server.js
 
 jsonwebtoken is what we use to generate the tokens
+
+
+
+
+TODO
+
+Thanks for the great course, as usual :P
+
+Some bugs I found...
+
+1. You forgot to implement cart reset after order is submited, the cart stays with the items even if the order submited and payed,
+
+2. The search box, when you press the "back" button, it goes back, but the search input stays with the search value.
+
+3. The loaders.. when you used {successUpdate && ...} and {success && ...} sometimes you can see two loaders on one action (for example in the product managment page, try to delete a couple of products one after other).
+
+4. product details page reset.. when you enter a couple of different products, you can see the previous product details for a second, untill it updates with the new product details.
+
+5. Usualy only clients that bought some product should be able to rate it, not everybody.
+
+6. When you delete user, you should delete his orders also... its not makes sense to leave it.. besides you cant enter/view any of the deleted user orders...
+
+7. When you keep the product details in the order tabe (details like image), if the product get updated, its not appears in the orders.. you can still see the old product details.. I think it should be populated with the product table and get the updated details from that table.
+
+8. Maybe you can add stripe in addition to paypal.
+
+9. Save cart to DB so when you logout and local storage gets cleard, you still have it
+
+10. Save address to profile, if you create an address
+
+11. Add go back to shopping buttons
+
+12. center some of the screens, login, shipping, payment, place order
+
+13. add home screens
+
+14. some additional components 
+  seasonal selections, winter clearance, recomendations based on last selection (size, category)
+  consignment features, complete wardrobe feature
+
+15. consignment form that emails info to admins
+
+16. old warning messages dont go Anyway
+
+17. add state to address
+
+18. search bar
+
+19. finish footer
+
+20. logo (bunny?)
+
+21. redu bunny loaders
+
+22. partners
+
+23. reduce count in stock in DB when order goes through
+
+24. add payment method to local storage so it remebers
+
+25. change the product id back to _id to avoid confusion
+
+26. seperate paypal / credit card or clarify the method can be both
+
+27. figure out shipping, maybe each DB item has a weight and you can calculate shipping from that? or maybe just add it into the price and do free shipping
+
+28. tax needs a system
+
+29. email that goes out to admins when an order comes in
+
+30. easy to change local storage item prices
+  for(const item in order.orderItems) {
+  const product = await Product.findById(item.product);
+  item.price = product.price;
+
+}
+
+
+
+Use the JavaScript Internationalization API.
+
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2
+})
+ 
+formatter.format(1000) // $1,000.00
+
