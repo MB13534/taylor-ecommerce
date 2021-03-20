@@ -9,6 +9,8 @@ import CheckoutSteps from "../components/CheckoutSteps";
 
 //actions
 import { createOrder } from "../actions/orderActions";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import { USER_DETAILS_RESET } from "../constants/userConstants";
 
 const PlaceOrderScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -50,8 +52,10 @@ const PlaceOrderScreen = ({ history }) => {
     //if the state returns a success, then we redirect the user to the order confirmation page
     if (success) {
       history.push(`/order/${order._id}`);
+      dispatch({ type: USER_DETAILS_RESET });
+      dispatch({ type: ORDER_CREATE_RESET });
     }
-  }, [history, success, order]);
+  }, [history, success, order, dispatch]);
 
   const handlePlaceOrder = () => {
     // pass in the whole order as an object
