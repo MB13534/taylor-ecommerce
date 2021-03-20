@@ -51,7 +51,7 @@ const PlaceOrderScreen = ({ history }) => {
   useEffect(() => {
     //if the state returns a success, then we redirect the user to the order confirmation page
     if (success) {
-      history.push(`/order/${order._id}`);
+      history.push(`/orders/${order._id}`);
       dispatch({ type: USER_DETAILS_RESET });
       dispatch({ type: ORDER_CREATE_RESET });
     }
@@ -92,6 +92,7 @@ const PlaceOrderScreen = ({ history }) => {
             <ListGroup.Item>
               {/* payment confirmation */}
               <h2>Payment Method</h2>
+
               <strong>Method: </strong>
               {cart.paymentMethod}
             </ListGroup.Item>
@@ -105,7 +106,7 @@ const PlaceOrderScreen = ({ history }) => {
                 <ListGroup variant="flush">
                   {cart.cartItems.map((item) => (
                     <ListGroup.Item key={item.product}>
-                      <Row>
+                      <Row className="d-flex align-items-center">
                         <Col md={2} className="pl-0 pr-0">
                           <Image
                             src={item.images[0]}
@@ -115,7 +116,7 @@ const PlaceOrderScreen = ({ history }) => {
                           />
                         </Col>
                         <Col>
-                          <Link to={`/product/${item.product}`}>
+                          <Link to={`/products/${item.product}`}>
                             {item.name}
                           </Link>
                         </Col>
@@ -148,7 +149,7 @@ const PlaceOrderScreen = ({ history }) => {
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${cart.shippingPrice}</Col>
+                  <Col>${cart.shippingPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
               {/* tax total */}

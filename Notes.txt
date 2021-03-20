@@ -54,8 +54,8 @@ to get into from the body, add bodyParser // app.use(express.json()) at server.j
 
 jsonwebtoken is what we use to generate the tokens
 
-
-
+when you create a paypal account, put the client ID in the .env folder and make a special route right in server.js to access it
+we also need to include a specific JSscript to get paypal to work - we will create it dynamically in our useEffect
 
 TODO
 
@@ -130,7 +130,9 @@ Some bugs I found...
 
 }
 
+31. check to make sure the owner of the order is the person that is logged in and placed the order, cant just check on an order if you have the order number
 
+32. google, apple, facebook log-in options
 
 Use the JavaScript Internationalization API.
 

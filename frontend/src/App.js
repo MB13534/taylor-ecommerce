@@ -16,6 +16,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import OrderScreen from "./screens/OrderScreen";
 
 const App = () => {
   //base url
@@ -26,16 +27,17 @@ const App = () => {
       <Header />
       <main className="py-3">
         <Container>
-          <Route path="/login" component={LoginScreen} />
-          <Route path="/shipping" component={ShippingScreen} />
-          <Route path="/payment" component={PaymentScreen} />
-          <Route path="/placeorder" component={PlaceOrderScreen} />
-          <Route path="/register" component={RegisterScreen} />
-          <Route path="/profile" component={ProfileScreen} />
-          <Route path="/products" component={AllProductsScreen} />
-          <Route path="/products/:id" component={ProductScreen} />
+          <Route path="/login" component={LoginScreen} exact />
+          <Route path="/shipping" component={ShippingScreen} exact />
+          <Route path="/orders/:id" component={OrderScreen} exact />
+          <Route path="/payment" component={PaymentScreen} exact />
+          <Route path="/placeorder" component={PlaceOrderScreen} exact />
+          <Route path="/register" component={RegisterScreen} exact />
+          <Route path="/profile" component={ProfileScreen} exact />
+          <Route path="/products" component={AllProductsScreen} exact />
+          <Route path="/products/:id" component={ProductScreen} exact />
           {/* the ? makes the id optional */}
-          <Route path="/cart/:id?" component={CartScreen} />
+          <Route path="/cart/:id?" component={CartScreen} exact />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

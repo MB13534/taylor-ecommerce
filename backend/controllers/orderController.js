@@ -40,3 +40,49 @@ export const addOrderItems = asyncHandler(async (req, res) => {
     res.status(201).json(createdOrder);
   }
 });
+
+// @desc      Get order by id
+// @route     GET /api/orders/:id
+// @access    private
+export const getOrderById = asyncHandler(async (req, res) => {
+  //in addition to the order, we also want some user information that is associated with the order
+  const order = await await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
+
+  if (order) {
+    res.json(order);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
+// @desc      update order to paid
+// @route     GET /api/orders/:id/pay
+// @access    private
+export const updateOrderToPaid = asyncHandler(async (req, res) => {
+  //find order by id
+  const order = await Order.findById(req.params.id);
+
+  //if the order exists, set it to paid, timestamp it, and give the result from paypal
+  if (order) {
+    //update the properties of the order
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.payer.email_address,
+    };
+    //save the updated order
+    const updatedOrder = await order.save();
+    //send to the user what is sent back from updating the order
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});

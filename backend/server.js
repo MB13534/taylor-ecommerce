@@ -29,6 +29,11 @@ app.use("/api/users", userRoutes);
 //anything that comes to the route will be linked to orderRoutes
 app.use("/api/orders", orderRoutes);
 
+//special route to access the paypal client id
+app.get("/api/config/paypal", (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 //if the route was not found, respond with a 404 not found
 app.use(notFound);
 
