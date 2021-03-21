@@ -4,7 +4,11 @@ import express from "express";
 import {
   getProducts,
   getProductById,
+  productRemoveInventory,
 } from "../controllers/productController.js";
+
+//middleware
+import { protect, admin } from "../middleware/authMiddleware.js";
 
 //handles various incoming routes
 const router = express.Router();
@@ -14,6 +18,9 @@ const router = express.Router();
 router.route("/").get(getProducts);
 
 //if port 5000 receives a get request to '/api/products/:id', respond with that single product
-router.route("/:id").get(getProductById);
+router
+  .route("/:id")
+  .get(getProductById)
+  .patch(protect, admin, productRemoveInventory);
 
 export default router;

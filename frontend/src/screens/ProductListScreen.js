@@ -10,13 +10,25 @@ import BunnyLoader from "../components/BunnyLoader";
 import ConfirmationModal from "../components/ConfirmationModal";
 
 //actions
-import { listProducts } from "../actions/productActions";
+import {
+  listProducts,
+  removeProductInventory,
+} from "../actions/productActions";
 
 const ProductListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
+
+  const productRemoveInventory = useSelector(
+    (state) => state.productRemoveInventory
+  );
+  const {
+    loading: loadingRemove,
+    error: errorRemove,
+    success: successRemove,
+  } = productRemoveInventory;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -27,10 +39,10 @@ const ProductListScreen = ({ history, match }) => {
     } else {
       history.pushState("/login");
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, successRemove]);
 
   const deleteHandler = (id) => {
-    console.log(id, "product deleted");
+    dispatch(removeProductInventory(id));
   };
 
   const createProductHandler = () => {
@@ -63,7 +75,8 @@ const ProductListScreen = ({ history, match }) => {
           </Button>
         </Col>
       </Row>
-
+      {loadingRemove && <BunnyLoader />}
+      {errorRemove && <Message variant="danger">{errorRemove}</Message>}
       {loading ? (
         <BunnyLoader />
       ) : error ? (
@@ -117,6 +130,7 @@ const ProductListScreen = ({ history, match }) => {
                     <Button
                       variant="danger"
                       block
+                      disabled={product.countInStock < 1 && "disabled"}
                       className="btn-sm"
                       onClick={() => handleShow(product._id)}
                     >

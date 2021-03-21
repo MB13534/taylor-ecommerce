@@ -5,6 +5,9 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  PRODUCT_REMOVE_INVENTORY_REQUEST,
+  PRODUCT_REMOVE_INVENTORY_SUCCESS,
+  PRODUCT_REMOVE_INVENTORY_FAIL,
 } from "../constants/productConstants";
 
 //reducer takes in the initial state (default state), and an action
@@ -32,6 +35,19 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
     case PRODUCT_DETAILS_SUCCESS:
       return { loading: false, product: action.payload };
     case PRODUCT_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productRemoveInventoryReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_REMOVE_INVENTORY_REQUEST:
+      return { loading: true };
+    case PRODUCT_REMOVE_INVENTORY_SUCCESS:
+      return { loading: false, success: true };
+    case PRODUCT_REMOVE_INVENTORY_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

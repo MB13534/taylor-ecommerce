@@ -140,6 +140,8 @@ Some bugs I found...
 
 35 more personal information? size, first/last name
 
+36. change from deleting users and products, to retiring them. Never actually remove from the DB
+
 Use the JavaScript Internationalization API.
 
 const formatter = new Intl.NumberFormat('en-US', {

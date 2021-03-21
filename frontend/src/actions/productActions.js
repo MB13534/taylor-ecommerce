@@ -8,7 +8,13 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  PRODUCT_REMOVE_INVENTORY_REQUEST,
+  PRODUCT_REMOVE_INVENTORY_SUCCESS,
+  PRODUCT_REMOVE_INVENTORY_FAIL,
 } from "../constants/productConstants";
+
+//actions
+import { logout } from "./userActions";
 
 export const listProducts = () => async (dispatch) => {
   try {
@@ -52,6 +58,46 @@ export const listProductDetails = (id) => async (dispatch) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
+    });
+  }
+};
+
+export const removeProductInventory = (id) => async (dispatch, getState) => {
+  try {
+    //dispatch that we are making a request, loading state goes to true
+    dispatch({
+      type: PRODUCT_REMOVE_INVENTORY_REQUEST,
+    });
+
+    //get userInfo out of state.userLogin.userInfo
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    //boilerplate needed for the token
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    //patch the request with route, and config
+    await axios.patch(`/api/products/${id}`, id, config);
+
+    dispatch({
+      type: PRODUCT_REMOVE_INVENTORY_SUCCESS,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_REMOVE_INVENTORY_FAIL,
+      payload: message,
     });
   }
 };

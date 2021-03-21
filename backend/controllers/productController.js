@@ -29,3 +29,24 @@ export const getProductById = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 });
+
+// @desc      SETS INVENTORY TO ZERO, i dont want to remove anything from DB to not cause conflict with old orders
+// @route     PATCH /api/products/:id
+// @access    private/admin
+export const productRemoveInventory = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  //check to see if the product exists
+  if (product) {
+    product.countInStock = 0;
+    await product.save();
+    res.json({ message: "Product inventory set to 0" });
+
+    // await product.remove();
+    // res.json({ message: "Product removed" });
+  } else {
+    //if the product is not found and the id is a correct format (just not in DB), respond with a not found error (404)
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
