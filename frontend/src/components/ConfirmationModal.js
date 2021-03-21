@@ -10,7 +10,7 @@ const ConfirmationModal = ({
   cancelButtonColor,
   confirmButton,
   confirmButtonColor,
-  userId,
+  id,
 }) => {
   return (
     <>
@@ -27,7 +27,7 @@ const ConfirmationModal = ({
             variant={confirmButtonColor}
             onClick={() => {
               onHide();
-              deleteHandler(userId);
+              deleteHandler(id);
             }}
           >
             {confirmButton}

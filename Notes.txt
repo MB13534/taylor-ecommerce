@@ -138,6 +138,8 @@ Some bugs I found...
 
 34. isdelivered to isshipped?
 
+35 more personal information? size, first/last name
+
 Use the JavaScript Internationalization API.
 
 const formatter = new Intl.NumberFormat('en-US', {

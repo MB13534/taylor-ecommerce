@@ -23,6 +23,9 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
 } from "../constants/userConstants";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 
@@ -260,6 +263,48 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     //if there is an error
     dispatch({
       type: USER_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateUser = (user) => async (dispatch, getState) => {
+  try {
+    //dispatch to reducer to change state to loading
+    dispatch({ type: USER_UPDATE_REQUEST });
+
+    //destructure two levels of getState function
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    //we must create a config object because when we send data we need to send a content type of application/json
+    //the token comes from the getState destructure
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    //first argument is url, second is user,. third isconfig
+    const { data } = await axios.put(`/api/users/${user._id}`, user, config);
+    //send off to reducer to update state
+    dispatch({
+      type: USER_UPDATE_SUCCESS,
+    });
+
+    dispatch({
+      type: USER_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    //if there is an error
+    dispatch({
+      type: USER_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

@@ -22,10 +22,10 @@ body {
 
 .rabbit-background {
   background: #f3969a;
-  height: 100px;
+  height: 100vw;
   width: 100vw;
-  position: absolute;
-  top: 5px;
+  /* position: absolute;
+  top: 5px; */
 }
 
 /* line 18, ../bunny/BunnyLoader.scss */
@@ -43,7 +43,8 @@ body {
   border-radius: 100%;
   top: 0.5em;
   left: -0.3em;
-  box-shadow: 4em 0.4em 0 -0.35em #3f3334, 0.5em 1em 0 white, 4em 1em 0 -0.3em white, 4em 1em 0 -0.3em white, 4em 1em 0 -0.4em white;
+  box-shadow: 4em 0.4em 0 -0.35em #3f3334, 0.5em 1em 0 white,
+    4em 1em 0 -0.3em white, 4em 1em 0 -0.3em white, 4em 1em 0 -0.4em white;
   animation: kick 1s infinite linear;
 }
 
@@ -51,7 +52,7 @@ body {
 .rabbit:after {
   content: "";
   position: absolute;
-  width: .75em;
+  width: 0.75em;
   height: 2em;
   background: white;
   border-radius: 50% 100% 0 0;
@@ -79,8 +80,9 @@ body {
 }
 
 /* line 65, ../bunny/BunnyLoader.scss */
-.clouds:before, .clouds:after {
-  content: '';
+.clouds:before,
+.clouds:after {
+  content: "";
   position: absolute;
   box-shadow: 5em 2em 0 -0.3em white, -2em 2em 0 white;
 }
@@ -114,26 +116,24 @@ body {
     transform: rotate(10deg) translate(3em, -4em);
     box-shadow: -0.2em 3.25em 0 -1.1em #b78e81;
   }
-  60%, 75% {
+  60%,
+  75% {
     transform: rotate(0) translate(4em, 0);
     box-shadow: -0.2em 1em 0 -0.75em #b78e81;
   }
 }
 
 @keyframes kick {
-  20%, 50% {
-    box-shadow: 4em 0.4em 0 -0.35em #3f3334,
- 0.5em 1.5em 0 white,
- 4em 1.75em 0 -0.3em white,
- 4em 1.75em 0 -0.3em white,
- 4em 1.9em 0 -0.4em white;
+  20%,
+  50% {
+    box-shadow: 4em 0.4em 0 -0.35em #3f3334, 0.5em 1.5em 0 white,
+      4em 1.75em 0 -0.3em white, 4em 1.75em 0 -0.3em white,
+      4em 1.9em 0 -0.4em white;
   }
   40% {
-    box-shadow: 4em 0.4em 0 -0.35em #3f3334,
- 0.5em 2em 0 white,
- 4em 1.75em 0 -0.3em white,
- 4.2em 1.75em 0 -0.2em white,
- 4.4em 1.9em 0 -0.2em white;
+    box-shadow: 4em 0.4em 0 -0.35em #3f3334, 0.5em 2em 0 white,
+      4em 1.75em 0 -0.3em white, 4.2em 1.75em 0 -0.2em white,
+      4.4em 1.9em 0 -0.2em white;
   }
 }
 
@@ -149,11 +149,8 @@ body {
     transform: translate(-4em, 0);
   }
   90% {
-
     transform: translate(0, 0);
   }
 }
-
-
 
 /*# sourceMappingURL=BunnyLoader.css.map */

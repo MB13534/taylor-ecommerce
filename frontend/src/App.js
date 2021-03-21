@@ -18,6 +18,8 @@ import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import UserListScreen from "./screens/UserListScreen";
+import UserEditScreen from "./screens/UserEditScreen";
+import ProductListScreen from "./screens/ProductListScreen";
 
 const App = () => {
   //base url
@@ -40,6 +42,16 @@ const App = () => {
           {/* the ? makes the id optional */}
           <Route path="/cart/:id?" component={CartScreen} exact />
           <Route path="/admin/userlist" component={UserListScreen} exact />
+          <Route
+            path="/admin/users/:id/edit"
+            component={UserEditScreen}
+            exact
+          />
+          <Route
+            path="/admin/productlist"
+            component={ProductListScreen}
+            exact
+          />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

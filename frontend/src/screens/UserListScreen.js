@@ -37,9 +37,13 @@ const UserListScreen = ({ history }) => {
 
   //confirmation modal functionality
   const [show, setShow] = useState(false);
+  const [modalItemId, setModalItemId] = useState({});
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (id) => {
+    setModalItemId(id);
+    setShow(true);
+  };
 
   return (
     <>
@@ -62,7 +66,7 @@ const UserListScreen = ({ history }) => {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user._id}>
+                <tr key={user._id} className="text-dark">
                   <td>{user._id}</td>
                   <td>{user.name}</td>
                   <td>
@@ -81,28 +85,18 @@ const UserListScreen = ({ history }) => {
                     )}
                   </td>
                   <td className="d-flex justify-content-around">
-                    <LinkContainer to={`/user/${user._id}/edit`}>
+                    <LinkContainer to={`/admin/users/${user._id}/edit`}>
                       <Button variant="light" className="btn-sm">
                         <i className="fas fa-edit"></i>
                       </Button>
                     </LinkContainer>
-                    <ConfirmationModal
-                      show={show}
-                      onHide={handleClose}
-                      deleteHandler={deleteHandler}
-                      title="Deleting a User"
-                      body="Are you sure you want to delete this user?"
-                      cancelButton="Cancel"
-                      cancelButtonColor="primary"
-                      confirmButton="Delete User"
-                      confirmButtonColor="secondary"
-                      userId={user._id}
-                    />
+
                     <Button
                       variant="danger"
+                      disabled={userInfo._id === user._id}
                       className="btn-sm"
                       onClick={() => {
-                        handleShow();
+                        handleShow(user._id);
                       }}
                     >
                       <i className="fas fa-trash"></i>
@@ -111,6 +105,18 @@ const UserListScreen = ({ history }) => {
                 </tr>
               ))}
             </tbody>
+            <ConfirmationModal
+              show={show}
+              onHide={handleClose}
+              deleteHandler={deleteHandler}
+              title="Deleting a User"
+              body="Are you sure you want to delete this user?"
+              cancelButton="Cancel"
+              cancelButtonColor="primary"
+              confirmButton="Delete User"
+              confirmButtonColor="secondary"
+              id={modalItemId}
+            />
           </Table>
           ;
         </>
