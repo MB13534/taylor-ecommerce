@@ -134,6 +134,10 @@ Some bugs I found...
 
 32. google, apple, facebook log-in options
 
+33. confirmation modal when deleting a user ect
+
+34. isdelivered to isshipped?
+
 Use the JavaScript Internationalization API.
 
 const formatter = new Intl.NumberFormat('en-US', {
