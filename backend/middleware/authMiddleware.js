@@ -38,4 +38,12 @@ export const protect = asyncHandler(async (req, res, next) => {
   }
 });
 
-//this will validate the token
+export const admin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    //not authorizxed
+    res.status(401);
+    throw new Error("Not authorized as an admin");
+  }
+};

@@ -76,7 +76,7 @@ const OrderScreen = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [order, orderId, dispatch, successPay]);
+  }, [order, orderId, dispatch, successPay, history, userInfo]);
 
   //handler for a successful paypal payment
   const successPaymentHandler = (paymentResult) => {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
 
 //components
 import Message from "../components/Message";
@@ -11,6 +12,7 @@ import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
 //actions
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
+import { listMyOrders } from "../actions/orderActions";
 
 const ProfileScreen = ({ location, history }) => {
   //component state that will hold the name, email and password
@@ -32,6 +34,9 @@ const ProfileScreen = ({ location, history }) => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
 
+  const orderListMy = useSelector((state) => state.orderListMy);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
+
   //if the user is already logged in, then apply a redirect so they do not see the login screen again
   //they would head directly to the shipping page if they are already logged in
   useEffect(() => {
@@ -42,6 +47,7 @@ const ProfileScreen = ({ location, history }) => {
       if (!user || !user.name || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
+        dispatch(listMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);
@@ -118,13 +124,67 @@ const ProfileScreen = ({ location, history }) => {
           </Form.Group>
 
           {/* button */}
-          <Button type="submit" variant="secondary">
+          <Button type="submit" variant="dark">
             Update Profile
           </Button>
         </Form>
       </Col>
       <Col md={9}>
+        {/* my orders */}
         <h2>My Orders</h2>
+        {loadingOrders ? (
+          <BunnyLoader />
+        ) : errorOrders ? (
+          <Message variant="danger">{errorOrders}</Message>
+        ) : (
+          <Table striped bordered hover responsive className="table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>DATE</th>
+                <th>TOTAL</th>
+                <th>PAID</th>
+                <th>DELIVERED</th>
+                <th>DETAILS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>
+                    {/* only want the first 10 characters of the date string */}
+                    {order.createdAt.substring(0, 10)}
+                  </td>
+                  <td>{order.totalPrice}</td>
+                  {/* is paid */}
+                  <td>
+                    {order.isPaid ? (
+                      order.paidAt.substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </td>
+                  {/* is delivered */}
+                  <td>
+                    {order.isDelivered ? (
+                      order.deliveredAt.substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </td>
+                  <td>
+                    <LinkContainer to={`/orders/${order._id}`}>
+                      <Button block size="sm" variant="info">
+                        Details
+                      </Button>
+                    </LinkContainer>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </Col>
     </Row>
   );

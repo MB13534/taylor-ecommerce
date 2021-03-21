@@ -16,7 +16,12 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
+  USER_LIST_REQUEST,
+  USER_LIST_SUCCESS,
+  USER_LIST_FAIL,
+  USER_LIST_RESET,
 } from "../constants/userConstants";
+import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -63,10 +68,9 @@ export const logout = () => (dispatch) => {
   //call reducer to update state
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
-  //need to come back to this if it is not resolved
-  // dispatch({ type: ORDER_LIST_MY_RESET })
-  // dispatch({ type: USER_LIST_RESET })
-  document.location.href = "/login";
+  dispatch({ type: ORDER_LIST_MY_RESET });
+  dispatch({ type: USER_LIST_RESET });
+  document.location.href = "/taylor-ecommerce/login";
 };
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -180,6 +184,43 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     //if there is an error
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listUsers = () => async (dispatch, getState) => {
+  try {
+    //dispatch to reducer to change state to loading
+    dispatch({ type: USER_LIST_REQUEST });
+
+    //destructure two levels of getState function
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    //we must create a config object because when we send data we need to send a content type of application/json
+    //the token comes from the getState destructure
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    //first argument is url, second is config
+    const { data } = await axios.get(`/api/users`, config);
+    //send off to reducer to update state
+    dispatch({
+      type: USER_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    //if there is an error
+    dispatch({
+      type: USER_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
