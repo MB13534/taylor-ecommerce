@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 const ConfirmationModal = ({
   show,
   onHide,
-  deleteHandler,
+  confirmHandler,
   title,
   body,
   cancelButton,
@@ -27,7 +27,7 @@ const ConfirmationModal = ({
             variant={confirmButtonColor}
             onClick={() => {
               onHide();
-              deleteHandler(id);
+              confirmHandler(id);
             }}
           >
             {confirmButton}

@@ -66,22 +66,35 @@ const ProductListScreen = ({ history, match }) => {
     createdProduct,
   ]);
 
-  const deleteHandler = (id) => {
+  const removeInventoryHandler = (id) => {
     dispatch(removeProductInventory(id));
+  };
+
+  const deleteProductHandler = () => {
+    console.log("delete");
   };
 
   const createProductHandler = () => {
     dispatch(createProduct());
   };
 
-  //confirmation modal functionality
-  const [show, setShow] = useState(false);
+  //remove item modal functionality
+  const [showRemove, setShowRemove] = useState(false);
   const [modalItemId, setModalItemId] = useState({});
 
-  const handleClose = () => setShow(false);
-  const handleShow = (id) => {
+  const handleCloseRemove = () => setShowRemove(false);
+  const handleShowRemove = (id) => {
     setModalItemId(id);
-    setShow(true);
+    setShowRemove(true);
+  };
+
+  //delete item modal functionality
+  const [showDelete, setShowDelete] = useState(false);
+
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = (id) => {
+    setModalItemId(id);
+    setShowDelete(true);
   };
 
   return (
@@ -121,7 +134,8 @@ const ProductListScreen = ({ history, match }) => {
                 <th>NWT</th>
                 <th>PRICE</th>
                 <th>QTY</th>
-                <th>EDIT</th>
+                <th>DELETE</th>
+                <th>EDITS</th>
               </tr>
             </thead>
             <tbody>
@@ -148,6 +162,16 @@ const ProductListScreen = ({ history, match }) => {
                   <td>${product.price}</td>
                   <td>{product.countInStock}</td>
                   <td>
+                    <Button
+                      onClick={() => handleShowDelete(product._id)}
+                      variant="danger"
+                      className="btn-lg mt-2"
+                      block
+                    >
+                      <i className="fas fa-trash"></i>
+                    </Button>
+                  </td>
+                  <td>
                     <LinkContainer to={`/admin/products/${product._id}/edit`}>
                       <Button block variant="light" className="btn-sm">
                         <i className="fas fa-edit"></i>
@@ -155,27 +179,40 @@ const ProductListScreen = ({ history, match }) => {
                     </LinkContainer>
 
                     <Button
-                      variant="danger"
-                      block
+                      onClick={() => handleShowRemove(product._id)}
                       disabled={product.countInStock < 1 && "disabled"}
+                      block
+                      variant="warning"
                       className="btn-sm"
-                      onClick={() => handleShow(product._id)}
                     >
-                      <i className="fas fa-trash"></i>
+                      <i className="fab fa-creative-commons-zero"></i>
                     </Button>
                   </td>
                 </tr>
               ))}
             </tbody>
             <ConfirmationModal
-              show={show}
-              onHide={handleClose}
-              deleteHandler={deleteHandler}
-              title="Deleting a Product"
-              body="Are you sure you want to remove all of the inventory from this product?"
+              show={showRemove}
+              onHide={handleCloseRemove}
+              confirmHandler={removeInventoryHandler}
+              title="Removing all Inventory"
+              body="Are you sure you want to remove all of the inventory from this item?"
               cancelButton="Cancel"
               cancelButtonColor="primary"
               confirmButton="Remove Inventory"
+              confirmButtonColor="secondary"
+              id={modalItemId}
+            />
+
+            <ConfirmationModal
+              show={showDelete}
+              onHide={handleCloseDelete}
+              confirmHandler={deleteProductHandler}
+              title="Delete Product"
+              body="Are you sure you want delete this item from the database?"
+              cancelButton="Cancel"
+              cancelButtonColor="primary"
+              confirmButton="Delete Item"
               confirmButtonColor="secondary"
               id={modalItemId}
             />
