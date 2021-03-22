@@ -7,6 +7,7 @@ import {
   productListReducer,
   productDetailsReducer,
   productRemoveInventoryReducer,
+  productCreateReducer
 } from "./reducers/productReducers";
 import { cartReducers } from "./reducers/cartReducers";
 import {
@@ -43,6 +44,7 @@ const reducer = combineReducers({
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
   productRemoveInventory: productRemoveInventoryReducer,
+  productCreate: productCreateReducer
 });
 
 //upon inilization it will check local storage to see if there are any cartItems, if there is, it adds it to our initial state, otherwise it sets it as empty array

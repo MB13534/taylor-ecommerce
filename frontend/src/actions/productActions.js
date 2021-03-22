@@ -11,6 +11,9 @@ import {
   PRODUCT_REMOVE_INVENTORY_REQUEST,
   PRODUCT_REMOVE_INVENTORY_SUCCESS,
   PRODUCT_REMOVE_INVENTORY_FAIL,
+  PRODUCT_CREATE_REQUEST,
+  PRODUCT_CREATE_SUCCESS,
+  PRODUCT_CREATE_FAIL,
 } from "../constants/productConstants";
 
 //actions
@@ -97,6 +100,47 @@ export const removeProductInventory = (id) => async (dispatch, getState) => {
     }
     dispatch({
       type: PRODUCT_REMOVE_INVENTORY_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const createProduct = () => async (dispatch, getState) => {
+  try {
+    //dispatch that we are making a request, loading state goes to true
+    dispatch({
+      type: PRODUCT_CREATE_REQUEST,
+    });
+
+    //get userInfo out of state.userLogin.userInfo
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    //boilerplate needed for the token
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    //patch the request with route, and config
+    const { data } = await axios.post(`/api/products`, {}, config);
+
+    dispatch({
+      type: PRODUCT_CREATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_CREATE_FAIL,
       payload: message,
     });
   }

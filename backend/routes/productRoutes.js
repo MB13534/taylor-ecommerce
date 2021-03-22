@@ -5,6 +5,8 @@ import {
   getProducts,
   getProductById,
   productRemoveInventory,
+  createProduct,
+  updateProduct,
 } from "../controllers/productController.js";
 
 //middleware
@@ -15,12 +17,13 @@ const router = express.Router();
 
 //if port 5000 receives a get request to '/api/products', respond with all products
 //the async handler will pass of errors to the master error handler
-router.route("/").get(getProducts);
+router.route("/").get(getProducts).post(protect, admin, createProduct);
 
 //if port 5000 receives a get request to '/api/products/:id', respond with that single product
 router
   .route("/:id")
   .get(getProductById)
-  .patch(protect, admin, productRemoveInventory);
+  .patch(protect, admin, productRemoveInventory)
+  .put(protect, admin, updateProduct);
 
 export default router;

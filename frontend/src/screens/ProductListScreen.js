@@ -13,7 +13,11 @@ import ConfirmationModal from "../components/ConfirmationModal";
 import {
   listProducts,
   removeProductInventory,
+  createProduct,
 } from "../actions/productActions";
+
+//constants ACTIONS
+import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
 const ProductListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -30,23 +34,44 @@ const ProductListScreen = ({ history, match }) => {
     success: successRemove,
   } = productRemoveInventory;
 
+  const productCreate = useSelector((state) => state.productCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts());
-    } else {
-      history.pushState("/login");
+    dispatch({ type: PRODUCT_CREATE_RESET });
+
+    if (!userInfo.isAdmin) {
+      history.push("/login");
     }
-  }, [dispatch, history, userInfo, successRemove]);
+
+    if (successCreate) {
+      history.push(`/admin/product/${createdProduct._id}/edit}`);
+    } else {
+      dispatch(listProducts());
+    }
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    successRemove,
+    successCreate,
+    createdProduct,
+  ]);
 
   const deleteHandler = (id) => {
     dispatch(removeProductInventory(id));
   };
 
   const createProductHandler = () => {
-    console.log("create product");
+    dispatch(createProduct());
   };
 
   //confirmation modal functionality
@@ -77,6 +102,8 @@ const ProductListScreen = ({ history, match }) => {
       </Row>
       {loadingRemove && <BunnyLoader />}
       {errorRemove && <Message variant="danger">{errorRemove}</Message>}
+      {loadingCreate && <BunnyLoader />}
+      {errorCreate && <Message variant="danger">{errorCreate}</Message>}
       {loading ? (
         <BunnyLoader />
       ) : error ? (
@@ -145,10 +172,10 @@ const ProductListScreen = ({ history, match }) => {
               onHide={handleClose}
               deleteHandler={deleteHandler}
               title="Deleting a Product"
-              body="Are you sure you want to delete this product?"
+              body="Are you sure you want to remove all of the inventory from this product?"
               cancelButton="Cancel"
               cancelButtonColor="primary"
-              confirmButton="Delete Product"
+              confirmButton="Remove Inventory"
               confirmButtonColor="secondary"
               id={modalItemId}
             />
