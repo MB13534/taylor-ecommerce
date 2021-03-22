@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 //components
 import Message from "../components/Message";
@@ -29,6 +30,7 @@ const ProductEditScreen = ({ match, history }) => {
     success: successUpdate,
   } = productUpdate;
 
+  //all of the current on screen input state
   const [name, setName] = useState("");
   const [nwt, setNwt] = useState(false);
   const [brand, setBrand] = useState("");
@@ -42,6 +44,9 @@ const ProductEditScreen = ({ match, history }) => {
   const [subColor, setSubColor] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [images, setImages] = useState("");
+
+  //upload loading status state
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (!loading) {
@@ -93,6 +98,42 @@ const ProductEditScreen = ({ match, history }) => {
         images: images.split(","),
       })
     );
+  };
+  //SAVE
+  //when you upload an image, it must have multipart/form-data for content type in headers
+  const uploadFileHandler = async (e) => {
+    //e.target.files are all the files that are selected in the uploader
+    const files = e.target.files;
+    const formData = new FormData();
+
+    //loops through array of files and appends them to formData
+    for (var i = 0; i < files.length; i++) {
+      formData.append("image", files[i]);
+    }
+
+    //sets loading true before axios call
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      //axios call to add the images to url, with data, config
+      const { data } = await axios.post("/api/upload", formData, config);
+      //server returns an array of objects, make a newe array with just the paths and a leading /
+      let paths = data.map((item) => "/" + item.path);
+      //join the array together as one string seperated by ,
+      paths = paths.join(", ");
+
+      //if there were already images, then add a cama and then paths, if no current images, just add paths with no cama
+      setImages(!images ? paths : images + ", " + paths);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
   };
 
   return (
@@ -244,8 +285,19 @@ const ProductEditScreen = ({ match, history }) => {
             </Form.Group>
 
             {/* images */}
+            {/* upload */}
             <Form.Group controlId="images">
               <Form.Label>Images</Form.Label>
+              <Form.File
+                className="mb-2"
+                id="image-file"
+                label="Choose File"
+                multiple
+                custom
+                onChange={uploadFileHandler}
+              ></Form.File>
+              {uploading && <BunnyLoader />}
+              {/* text */}
               <Form.Control
                 as="textarea"
                 rows={16}

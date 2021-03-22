@@ -6,9 +6,9 @@ const ControlledCarousel = ({ product }) => {
   //carousel is rendered when index changes
   const [imageIndex, setImageIndex] = useState(0);
 
-  //removes any image with '' as field
+  //removes any image with '' as field, the seeder has some pictures that just have a cama
   if (images) {
-    images = images.filter((image) => image !== "");
+    images = images.filter((image) => image.length > 2);
   }
 
   //previous button handle function, resets index when it completes loop

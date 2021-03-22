@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import path from "path";
 //allows you to change colors of output to terminal
 import colors from "colors";
 
@@ -7,6 +8,7 @@ import colors from "colors";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 
 import connectDB from "./config/db.js";
 
@@ -28,6 +30,15 @@ app.use("/api/users", userRoutes);
 
 //anything that comes to the route will be linked to orderRoutes
 app.use("/api/orders", orderRoutes);
+
+app.use("/api/upload", uploadRoutes);
+
+//we need to make the uploads folder static so the files are accessible on deploy
+//use path module to point to current directory (__dirname is only available with common JS modules, not ES6)
+//we can mimic this syntax by using path.resolve()
+//it just takes us to the folder and makes it static
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //special route to access the paypal client id
 app.get("/api/config/paypal", (req, res) =>
