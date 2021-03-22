@@ -9,7 +9,10 @@ import BunnyLoader from "../components/BunnyLoader";
 import FormContainer from "../components/FormContainer";
 
 //actions
-import { listProductDetails } from "../actions/productActions";
+import { listProductDetails, updateProduct } from "../actions/productActions";
+
+//constants ACTIONS
+import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 
 const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id;
@@ -18,6 +21,13 @@ const ProductEditScreen = ({ match, history }) => {
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
+
+  const productUpdate = useSelector((state) => state.productUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = productUpdate;
 
   const [name, setName] = useState("");
   const [nwt, setNwt] = useState(false);
@@ -35,30 +45,54 @@ const ProductEditScreen = ({ match, history }) => {
 
   useEffect(() => {
     if (!loading) {
-      if (!product.name || product._id !== productId) {
-        dispatch(listProductDetails(productId));
+      if (successUpdate) {
+        dispatch({
+          type: PRODUCT_UPDATE_RESET,
+        });
+        history.push("/admin/productlist");
       } else {
-        setName(product.name);
-        setNwt(product.nwt);
-        setBrand(product.brand);
-        setPrice(product.price);
-        setSize(product.size);
-        setDescription(product.description);
-        setSex(product.sex);
-        setCategory(product.category);
-        setSubCategory(product.subCategory);
-        setColor(product.color);
-        setSubColor(product.subColor);
-        setCountInStock(product.countInStock);
-        setImages(product.images.join(", "));
+        if (!product.name || product._id !== productId) {
+          dispatch(listProductDetails(productId));
+        } else {
+          setName(product.name);
+          setNwt(product.nwt);
+          setBrand(product.brand);
+          setPrice(product.price);
+          setSize(product.size);
+          setDescription(product.description);
+          setSex(product.sex);
+          setCategory(product.category);
+          setSubCategory(product.subCategory);
+          setColor(product.color);
+          setSubColor(product.subColor);
+          setCountInStock(product.countInStock);
+          setImages(product.images.join(", "));
+        }
       }
     }
-  }, [dispatch, history, productId, product, loading]);
+  }, [dispatch, history, productId, product, loading, successUpdate]);
 
   //handle submit button
   const submitHandler = (e) => {
     e.preventDefault();
-    //UPDATE PRODUCT
+    dispatch(
+      updateProduct({
+        _id: productId,
+        name,
+        nwt,
+        brand,
+        price,
+        size,
+        description,
+        sex,
+        category,
+        subCategory,
+        color,
+        subColor,
+        countInStock,
+        images: images.split(","),
+      })
+    );
   };
 
   return (
@@ -68,6 +102,9 @@ const ProductEditScreen = ({ match, history }) => {
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>
+        {loadingUpdate && <BunnyLoader />}
+        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
+
         {loading ? (
           <BunnyLoader />
         ) : error ? (

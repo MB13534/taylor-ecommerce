@@ -14,6 +14,9 @@ import {
   PRODUCT_CREATE_REQUEST,
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_CREATE_FAIL,
+  PRODUCT_UPDATE_REQUEST,
+  PRODUCT_UPDATE_SUCCESS,
+  PRODUCT_UPDATE_FAIL,
 } from "../constants/productConstants";
 
 //actions
@@ -141,6 +144,52 @@ export const createProduct = () => async (dispatch, getState) => {
     }
     dispatch({
       type: PRODUCT_CREATE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const updateProduct = (product) => async (dispatch, getState) => {
+  try {
+    //dispatch that we are making a request, loading state goes to true
+    dispatch({
+      type: PRODUCT_UPDATE_REQUEST,
+    });
+
+    //get userInfo out of state.userLogin.userInfo
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    //boilerplate needed for the token
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    //patch the request with route, and config
+    const { data } = await axios.put(
+      `/api/products/${product._id}`,
+      product,
+      config
+    );
+
+    dispatch({
+      type: PRODUCT_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_UPDATE_FAIL,
       payload: message,
     });
   }

@@ -142,6 +142,14 @@ Some bugs I found...
 
 36. change from deleting users and products, to retiring them. Never actually remove from the DB
 
+37. the name in navbar doesnt change if you update the user you are currently logged in as
+
+38. $ sign on checking orders
+
+39 double lines on place order screen above place order
+
+40. when there are more than one dig of itemcount, it shows a leading 0 in the cart
+
 Use the JavaScript Internationalization API.
 
 const formatter = new Intl.NumberFormat('en-US', {
