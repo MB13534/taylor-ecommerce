@@ -7,6 +7,7 @@ import {
   productRemoveInventory,
   createProduct,
   updateProduct,
+  deleteProduct,
 } from "../controllers/productController.js";
 
 //middleware
@@ -24,6 +25,7 @@ router
   .route("/:id")
   .get(getProductById)
   .patch(protect, admin, productRemoveInventory)
-  .put(protect, admin, updateProduct);
+  .put(protect, admin, updateProduct)
+  .delete(protect, admin, deleteProduct);
 
 export default router;

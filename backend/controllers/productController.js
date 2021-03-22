@@ -51,6 +51,23 @@ export const productRemoveInventory = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc      DELETE a product
+// @route     DELETE /api/products/:id
+// @access    private/admin
+export const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  //check to see if the product exists
+  if (product) {
+    await product.remove();
+    res.json({ message: "Product removed" });
+  } else {
+    //if the product is not found and the id is a correct format (just not in DB), respond with a not found error (404)
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+
 // @desc      Create a product
 // @route     POST /api/products
 // @access    private/admin

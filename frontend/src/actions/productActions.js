@@ -11,6 +11,9 @@ import {
   PRODUCT_REMOVE_INVENTORY_REQUEST,
   PRODUCT_REMOVE_INVENTORY_SUCCESS,
   PRODUCT_REMOVE_INVENTORY_FAIL,
+  PRODUCT_DELETE_SUCCESS,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_FAIL,
   PRODUCT_CREATE_REQUEST,
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_CREATE_FAIL,
@@ -103,6 +106,42 @@ export const removeProductInventory = (id) => async (dispatch, getState) => {
     }
     dispatch({
       type: PRODUCT_REMOVE_INVENTORY_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const deleteProduct = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PRODUCT_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/products/${id}`, config);
+
+    dispatch({
+      type: PRODUCT_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: PRODUCT_DELETE_FAIL,
       payload: message,
     });
   }

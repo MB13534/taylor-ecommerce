@@ -22,10 +22,10 @@ body {
 
 .rabbit-background {
   background: #f3969a;
-  height: 100vw;
+  height: 100px;
   width: 100vw;
-  /* position: absolute;
-  top: 5px; */
+  position: absolute;
+  top: 5px;
 }
 
 /* line 18, ../bunny/BunnyLoader.scss */

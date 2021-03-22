@@ -14,6 +14,7 @@ import {
   listProducts,
   removeProductInventory,
   createProduct,
+  deleteProduct,
 } from "../actions/productActions";
 
 //constants ACTIONS
@@ -33,6 +34,13 @@ const ProductListScreen = ({ history, match }) => {
     error: errorRemove,
     success: successRemove,
   } = productRemoveInventory;
+
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete;
 
   const productCreate = useSelector((state) => state.productCreate);
   const {
@@ -64,14 +72,15 @@ const ProductListScreen = ({ history, match }) => {
     successRemove,
     successCreate,
     createdProduct,
+    successDelete,
   ]);
 
   const removeInventoryHandler = (id) => {
     dispatch(removeProductInventory(id));
   };
 
-  const deleteProductHandler = () => {
-    console.log("delete");
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
   };
 
   const createProductHandler = () => {
@@ -115,6 +124,8 @@ const ProductListScreen = ({ history, match }) => {
       </Row>
       {loadingRemove && <BunnyLoader />}
       {errorRemove && <Message variant="danger">{errorRemove}</Message>}
+      {loadingDelete && <BunnyLoader />}
+      {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loadingCreate && <BunnyLoader />}
       {errorCreate && <Message variant="danger">{errorCreate}</Message>}
       {loading ? (
