@@ -30,7 +30,7 @@ const SearchBox = ({ history }) => {
         value={keyword}
         size="sm"
       />
-      <Button type="submit" variant="outline-secondary" className="p-2 btn-sm">
+      <Button type="submit" variant="secondary" className="p-2 btn-sm">
         Search
       </Button>
     </Form>
