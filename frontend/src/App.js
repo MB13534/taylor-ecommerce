@@ -39,7 +39,7 @@ const App = () => {
           <Route path="/placeorder" component={PlaceOrderScreen} exact />
           <Route path="/register" component={RegisterScreen} exact />
           <Route path="/profile" component={ProfileScreen} exact />
-          <Route path="/products" component={AllProductsScreen} exact />
+
           <Route path="/products/:id" component={ProductScreen} exact />
           {/* the ? makes the id optional */}
           <Route path="/cart/:id?" component={CartScreen} exact />
@@ -60,6 +60,12 @@ const App = () => {
             exact
           />
           <Route path="/admin/orderlist" component={OrderListScreen} exact />
+          <Route path="/products" component={AllProductsScreen} exact />
+          <Route
+            path="/products/search/:keyword"
+            component={AllProductsScreen}
+            exact
+          />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

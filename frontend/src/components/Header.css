@@ -12,5 +12,20 @@
 }
 
 .navbar {
-  opacity: .97;
+  opacity: 0.95;
+}
+
+@media (max-width: 1200px) {
+  .header__responsive-text {
+    display: none;
+  }
+  .header__responsive-icon {
+    display: inline !important;
+  }
+}
+
+@media (max-width: 990px) {
+  .header__responsive-text {
+    display: inline-block;
+  }
 }

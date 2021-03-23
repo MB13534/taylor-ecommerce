@@ -8,8 +8,21 @@ import Product from "../models/productModel.js";
 // @route     GET /api/products/
 // @access    public
 export const getProducts = asyncHandler(async (req, res) => {
+  //checking to see if the body has a query string (the user searched in the bar)
+  //if there is, instead of returning all the products, we will narrow it down
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          //'i' is case insensitive
+          $options: "i",
+        },
+      }
+    : {};
+
   //calls to DB gives us everything as a promise, therefore make it async await
-  const products = await Product.find({});
+  //it will either be empty or it will have the keyword in it
+  const products = await Product.find({ ...keyword });
   //respond with all products
   res.json(products);
 });

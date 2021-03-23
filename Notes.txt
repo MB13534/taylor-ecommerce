@@ -176,6 +176,12 @@ Some bugs I found...
 
 51 dates dont match because of time
 
+52 discount codes for free shipping or discount off
+
+53 when you click a button to edit it, rerender just that item and not every item
+
+54 fix the navbar responsivness with the search bar
+
 Use the JavaScript Internationalization API.
 
 const formatter = new Intl.NumberFormat('en-US', {

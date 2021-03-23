@@ -1,0 +1,11 @@
+.search-box__outline:focus {
+  border-color: var(--secondary);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset,
+    0px 0px 8px rgba(243, 150, 154, 0.5);
+}
+
+@media (max-width: 1200px) {
+  input {
+    width: 300px !important;
+  }
+}

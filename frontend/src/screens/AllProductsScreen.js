@@ -13,7 +13,9 @@ import Product from "../components/Product";
 import BunnyLoader from "../components/BunnyLoader";
 import Message from "../components/Message";
 
-const HomeScreen = () => {
+const AllProductsScreen = ({ match }) => {
+  //check to see if there is a search param
+  const keyword = match.params.keyword;
   //to use disatch you must define and call it
   const dispatch = useDispatch();
 
@@ -29,8 +31,9 @@ const HomeScreen = () => {
   //useEffect takes a list of dependencies, it will fire off whenever any of those dependencies changes
   useEffect(() => {
     //fire off the listProducts action creator to fetch all the products
-    dispatch(listProducts());
-  }, [dispatch]);
+    //will also account for narrowing down the results if there is a keyword
+    dispatch(listProducts(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <>
@@ -69,4 +72,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default AllProductsScreen;

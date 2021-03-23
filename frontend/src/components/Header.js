@@ -1,9 +1,13 @@
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { Route } from "react-router-dom";
 
 //actions
 import { logout } from "../actions/userActions";
+
+//components
+import SearchBox from "./SearchBox";
 
 //css
 import "./Header.css";
@@ -17,6 +21,13 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const adminDropdownTitle = (
+    <span>
+      <i className="fas fa-user mr-1 header__responsive-icon"></i>{" "}
+      <span className="header__responsive-text">{userInfo.name}</span>{" "}
+    </span>
+  );
 
   return (
     <header>
@@ -40,21 +51,28 @@ const Header = () => {
           {/* side/collapsable links */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+            {/* the navbar does not have direct access to history, so we need Route to render it for us */}
+            <Route render={({ history }) => <SearchBox history={history} />} />
+
             <Nav className="ml-auto">
               <LinkContainer to="/products">
                 <Nav.Link>
-                  <i className="fas fa-tshirt mr-1"></i>Browse Inventory
+                  <i className="fas fa-tshirt mr-1"></i>
+                  <span className="header__responsive-text">
+                    Browse Inventory
+                  </span>
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart mr-1"></i>Cart
+                  <i className="fas fa-shopping-cart mr-1"></i>
+                  <span className="header__responsive-text">Cart</span>
                 </Nav.Link>
               </LinkContainer>
               {/* if the user is logged in, show name and drop down menu */}
               {userInfo ? (
                 //user name
-                <NavDropdown title={userInfo.name} id="username">
+                <NavDropdown title={adminDropdownTitle} id="username">
                   {/* uprofile link */}
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
