@@ -12,17 +12,22 @@ import { listProducts } from "../actions/productActions";
 import Product from "../components/Product";
 import BunnyLoader from "../components/BunnyLoader";
 import Message from "../components/Message";
+import Paginate from "../components/Paginate";
 
 const AllProductsScreen = ({ match }) => {
   //check to see if there is a search param
   const keyword = match.params.keyword;
+  //checks to see if the result was split by pagination
+  const pageNumber = match.params.pageNumber || 1;
+  //to use disatch you must define and call it
+  const pageSize = 50;
   //to use disatch you must define and call it
   const dispatch = useDispatch();
 
   //this needs to match what it is called in the store(key), to access state
   //useSelector takes in state and returns what portion of the state we want. THen you can deconstruct it
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   //this will be used when rendering each product, so it knows if the quick add button should start as pressed or not
   const cart = useSelector((state) => state.cart);
@@ -32,8 +37,8 @@ const AllProductsScreen = ({ match }) => {
   useEffect(() => {
     //fire off the listProducts action creator to fetch all the products
     //will also account for narrowing down the results if there is a keyword
-    dispatch(listProducts(keyword));
-  }, [dispatch, keyword]);
+    dispatch(listProducts(keyword, pageNumber, pageSize));
+  }, [dispatch, keyword, pageNumber, pageSize]);
 
   return (
     <>
@@ -51,21 +56,36 @@ const AllProductsScreen = ({ match }) => {
       ) : (
         <>
           <h1>Latest Products</h1>
-          <Row>
-            {/* renders all of the product carts in a grid format, each product goes in a col, already in a row */}
-            {products.map((product) => (
-              <Col
-                key={product._id}
-                sm={12}
-                md={6}
-                lg={4}
-                xl={3}
-                className="d-flex justify-content-center align-self-stretch"
-              >
-                <Product product={product} cartItems={cartItems} />
-              </Col>
-            ))}
-          </Row>
+          {products.length === 0 && (
+            <div>No items found. Check back later!!</div>
+          )}
+          <>
+            <Paginate
+              pages={pages}
+              page={page}
+              keyword={keyword ? keyword : ""}
+            />
+            <Row>
+              {/* renders all of the product carts in a grid format, each product goes in a col, already in a row */}
+              {products.map((product) => (
+                <Col
+                  key={product._id}
+                  sm={12}
+                  md={6}
+                  lg={4}
+                  xl={3}
+                  className="d-flex justify-content-center align-self-stretch"
+                >
+                  <Product product={product} cartItems={cartItems} />
+                </Col>
+              ))}
+            </Row>
+            <Paginate
+              pages={pages}
+              page={page}
+              keyword={keyword ? keyword : ""}
+            />
+          </>
         </>
       )}
     </>

@@ -8,6 +8,11 @@ import Product from "../models/productModel.js";
 // @route     GET /api/products/
 // @access    public
 export const getProducts = asyncHandler(async (req, res) => {
+  //this is how many products we want to appear on one page
+  // const pageSize = 50;
+  const pageSize = Number(req.query.pageSize);
+  //how to pickup the page number
+  const page = Number(req.query.pageNumber) || 1;
   //checking to see if the body has a query string (the user searched in the bar)
   //if there is, instead of returning all the products, we will narrow it down
   const keyword = req.query.keyword
@@ -20,11 +25,16 @@ export const getProducts = asyncHandler(async (req, res) => {
       }
     : {};
 
+  //count method lets us count the methods
+  const count = await Product.countDocuments({ ...keyword });
   //calls to DB gives us everything as a promise, therefore make it async await
   //it will either be empty or it will have the keyword in it
-  const products = await Product.find({ ...keyword });
-  //respond with all products
-  res.json(products);
+  //the limit says how many products to return, the skip will skip that first portion if it has moved on in pages
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  //respond with all products, the current page, and the total page count
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc      Fetch single product

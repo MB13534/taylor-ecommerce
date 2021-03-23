@@ -68,7 +68,9 @@ Thanks for the great course, as usual :P
 Some bugs I found...
 
 
+1. NUMBER OF SUBTOTAL ITEMS IS STILL INCORRECT
 
+2. have user set pagination number
 
 
 

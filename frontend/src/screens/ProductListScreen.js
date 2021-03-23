@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
 import ConfirmationModal from "../components/ConfirmationModal";
+import Paginate from "../components/Paginate";
 
 //actions
 import {
@@ -23,8 +24,10 @@ import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 const ProductListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
 
+  const pageNumber = match.params.pageNumber || 1;
+
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   const productRemoveInventory = useSelector(
     (state) => state.productRemoveInventory
@@ -63,7 +66,7 @@ const ProductListScreen = ({ history, match }) => {
     if (successCreate) {
       history.push(`/admin/products/${createdProduct._id}/edit`);
     } else {
-      dispatch(listProducts());
+      dispatch(listProducts("", pageNumber, 300));
     }
   }, [
     dispatch,
@@ -73,6 +76,7 @@ const ProductListScreen = ({ history, match }) => {
     successCreate,
     createdProduct,
     successDelete,
+    pageNumber,
   ]);
 
   const removeInventoryHandler = (id) => {
@@ -134,6 +138,7 @@ const ProductListScreen = ({ history, match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+          <Paginate pages={pages} page={page} isAdmin={true} />
           <Table striped bordered hover responsive className="table-sm ">
             <thead>
               <tr>
@@ -228,7 +233,7 @@ const ProductListScreen = ({ history, match }) => {
               id={modalItemId}
             />
           </Table>
-          ;
+          <Paginate pages={pages} page={page} />
         </>
       )}
     </>
