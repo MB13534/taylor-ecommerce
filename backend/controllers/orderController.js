@@ -96,3 +96,35 @@ export const getMyOrders = asyncHandler(async (req, res) => {
 
   res.json(orders);
 });
+
+// @desc      get all orders
+// @route     GET /api/orders
+// @access    private/admin
+export const getOrders = asyncHandler(async (req, res) => {
+  //find all orders
+  const orders = await Order.find({}).populate("user", "id name");
+
+  res.json(orders);
+});
+
+// @desc      update order to shipped
+// @route     GET /api/orders/:id/ship
+// @access    private/admin
+export const updateOrderToShipped = asyncHandler(async (req, res) => {
+  //find order by id
+  const order = await Order.findById(req.params.id);
+
+  //if the order exists, set it to shipped, timestamp it, and give the result from paypal
+  if (order) {
+    //update the properties of the order
+    order.isShipped = true;
+    order.shippedAt = Date.now();
+    //save the updated order
+    const updatedOrder = await order.save();
+    //send to the user what is sent back from updating the order
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});

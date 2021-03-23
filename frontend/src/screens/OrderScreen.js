@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -11,14 +11,15 @@ import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
 
 //actions
-import { getOrderDetails, payOrder } from "../actions/orderActions";
+import { getOrderDetails, payOrder, shipOrder } from "../actions/orderActions";
 
 //constants // ACTIONS
-import { ORDER_PAY_RESET } from "../constants/orderConstants";
+import { ORDER_PAY_RESET, ORDER_SHIP_RESET } from "../constants/orderConstants";
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
 
+  //ebay sdk
   const [sdkReady, setSdkReady] = useState(false);
 
   const dispatch = useDispatch();
@@ -32,6 +33,9 @@ const OrderScreen = ({ match, history }) => {
   const orderPay = useSelector((state) => state.orderPay);
   //deconstruct the orderPay state, since the variables are used above, rename them
   const { loading: loadingPay, success: successPay } = orderPay;
+
+  const orderShip = useSelector((state) => state.orderShip);
+  const { loading: loadingShip, success: successShip } = orderShip;
 
   //used as a check to make sure user is logged in
   const userLogin = useSelector((state) => state.userLogin);
@@ -64,9 +68,10 @@ const OrderScreen = ({ match, history }) => {
     };
 
     //fetches the order details if it isnt already loaded or if success beacuse accessible
-    if (!order || successPay || order._id !== orderId) {
+    if (!order || successPay || successShip || order._id !== orderId) {
       //must reset the order otherwise this will be an endless loop
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_SHIP_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       //if the order is not paid, add the paypal script
@@ -76,12 +81,15 @@ const OrderScreen = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [order, orderId, dispatch, successPay, history, userInfo]);
+  }, [order, orderId, dispatch, successPay, history, userInfo, successShip]);
 
   //handler for a successful paypal payment
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
+  };
+
+  const shipHandler = () => {
+    dispatch(shipOrder(orderId));
   };
 
   //if it is laoding show the loader, if there is an errror, show error, else render order
@@ -111,12 +119,12 @@ const OrderScreen = ({ match, history }) => {
                 {order.shippingAddress.postalCode},{" "}
                 {order.shippingAddress.country}
               </p>
-              {order.isDelivered ? (
+              {order.isShipped ? (
                 <Message variant="success">
-                  Delivered on {order.deliveredAt}
+                  Shipped on {order.shippedAt.substring(0, 10)}
                 </Message>
               ) : (
-                <Message variant="danger">Not Delivered</Message>
+                <Message variant="danger">Not Shipped</Message>
               )}
             </ListGroup.Item>
 
@@ -128,7 +136,9 @@ const OrderScreen = ({ match, history }) => {
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant="success">Paid on {order.paidAt}</Message>
+                <Message variant="success">
+                  Paid on {order.paidAt.substring(0, 10)}
+                </Message>
               ) : (
                 <Message variant="danger">Not Paid</Message>
               )}
@@ -218,6 +228,14 @@ const OrderScreen = ({ match, history }) => {
                       onSuccess={successPaymentHandler}
                     />
                   )}
+                </ListGroup.Item>
+              )}
+              {loadingShip && <BunnyLoader />}
+              {userInfo.isAdmin && order.isPaid && !order.isShipped && (
+                <ListGroup.Item>
+                  <Button block onClick={shipHandler}>
+                    Mark as Shipped
+                  </Button>
                 </ListGroup.Item>
               )}
             </ListGroup>

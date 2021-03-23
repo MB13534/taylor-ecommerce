@@ -172,6 +172,8 @@ Some bugs I found...
 
 50 fix the cama thing with the pictrure seeder, trailing camas
 
+51 dates dont match because of timezones
+
 Use the JavaScript Internationalization API.
 
 const formatter = new Intl.NumberFormat('en-US', {

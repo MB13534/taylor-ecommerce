@@ -14,6 +14,12 @@ import {
   ORDER_LIST_MY_REQUEST,
   ORDER_LIST_MY_SUCCESS,
   ORDER_LIST_MY_FAIL,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
+  ORDER_LIST_FAIL,
+  ORDER_SHIP_REQUEST,
+  ORDER_SHIP_SUCCESS,
+  ORDER_SHIP_FAIL,
 } from "../constants/orderConstants";
 import { CART_CLEAR_ITEMS } from "../constants/cartConstants";
 
@@ -194,6 +200,83 @@ export const listMyOrders = () => async (dispatch, getState) => {
     }
     dispatch({
       type: ORDER_LIST_MY_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const listOrders = () => async (dispatch, getState) => {
+  try {
+    //immediatly dispatch the action request to update state to order = [] and loading = true
+    dispatch({ type: ORDER_LIST_REQUEST });
+
+    //get userInfo out of state.userLogin.userInfo
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    //boilerplate needed for the token
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get("/api/orders", config);
+    //after successfuling fetching the data dispatch action request success to update loading to false and product to action.payload
+    dispatch({
+      type: ORDER_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    //if fail, dispatch action fail to change state to loading fail, and error
+    dispatch({
+      type: ORDER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const shipOrder = (orderId) => async (dispatch, getState) => {
+  try {
+    //dispatch that we are making a request, loading state goes to true
+    dispatch({
+      type: ORDER_SHIP_REQUEST,
+    });
+
+    //get userInfo out of state.userLogin.userInfo
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    //boilerplate needed for the token
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    //post the request with route and config
+    //**dont forget to put the empty opject */
+    const { data } = await axios.put(`/api/orders/${orderId}/ship`, {}, config);
+
+    dispatch({
+      type: ORDER_SHIP_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ORDER_SHIP_FAIL,
       payload: message,
     });
   }
