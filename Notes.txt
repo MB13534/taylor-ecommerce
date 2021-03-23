@@ -74,6 +74,12 @@ Some bugs I found...
 
 3. change name to title
 
+4. sort by nwt
+
+5. sort by price
+
+6. add subcolor and subcategory to search results
+
 
 
 6. When you delete user, you should delete his orders also... its not makes sense to leave it.. besides you cant enter/view any of the deleted user orders...

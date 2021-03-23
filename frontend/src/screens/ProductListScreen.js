@@ -233,7 +233,7 @@ const ProductListScreen = ({ history, match }) => {
               id={modalItemId}
             />
           </Table>
-          <Paginate pages={pages} page={page} />
+          <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
     </>

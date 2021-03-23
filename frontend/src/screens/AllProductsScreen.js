@@ -29,7 +29,7 @@ const AllProductsScreen = ({ match }) => {
   //this needs to match what it is called in the store(key), to access state
   //useSelector takes in state and returns what portion of the state we want. THen you can deconstruct it
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products, page, pages } = productList;
+  const { loading, error, products, page, pages, count } = productList;
 
   //this will be used when rendering each product, so it knows if the quick add button should start as pressed or not
   const cart = useSelector((state) => state.cart);
@@ -57,9 +57,17 @@ const AllProductsScreen = ({ match }) => {
         </Message>
       ) : (
         <>
-          <h1>Latest Products {keyword && keyword}</h1>
-          {products.length === 0 && (
-            <div>No items found. Check back later!!</div>
+          <h1>Latest Products</h1>
+          <h2>
+            {keyword &&
+              count > 4 &&
+              `There is a total of ${count} items that meet the criteria of ${keyword} in ${filter}.`}
+          </h2>
+          {count === 0 && (
+            <h2>There are currently no items. Please check back later!</h2>
+          )}
+          {!keyword && count !== 0 && (
+            <h2>There are currently {count} items. Enjoy shopping!</h2>
           )}
           <>
             <Paginate

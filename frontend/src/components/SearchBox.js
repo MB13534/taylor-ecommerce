@@ -49,7 +49,7 @@ const SearchBox = ({ history }) => {
         <option>Description</option>
       </Form.Control>
 
-      <Button type="submit" variant="secondary" className="p-2 btn-sm">
+      <Button type="submit" variant="secondary" className="p-2 btn-sm py-0">
         Search
       </Button>
     </Form>
