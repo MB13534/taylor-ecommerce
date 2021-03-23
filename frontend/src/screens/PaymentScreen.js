@@ -20,7 +20,7 @@ const PaymentScreen = ({ history }) => {
   }
 
   //paypal is our default payment method
-  const [paymentMethod, setPaymentMethod] = useState("PayPal");
+  const [paymentMethod, setPaymentMethod] = useState("PayPal or Credit Card");
 
   const dispatch = useDispatch();
 
@@ -46,7 +46,7 @@ const PaymentScreen = ({ history }) => {
               label="PayPal or Credit Card"
               id="PayPal"
               name="paymentMethod"
-              value="PayPal"
+              value="PayPal or Credit Card"
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>

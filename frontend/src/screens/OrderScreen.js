@@ -231,13 +231,16 @@ const OrderScreen = ({ match, history }) => {
                 </ListGroup.Item>
               )}
               {loadingShip && <BunnyLoader />}
-              {userInfo.isAdmin && order.isPaid && !order.isShipped && (
-                <ListGroup.Item>
-                  <Button block onClick={shipHandler}>
-                    Mark as Shipped
-                  </Button>
-                </ListGroup.Item>
-              )}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isShipped && (
+                  <ListGroup.Item>
+                    <Button block onClick={shipHandler}>
+                      Mark as Shipped
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>

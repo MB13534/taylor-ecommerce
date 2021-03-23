@@ -59,6 +59,8 @@ we also need to include a specific JSscript to get paypal to work - we will crea
 
 multer is a tool to allow us to handle multipart file uploads, we will create an endpoint at api/upload
 
+morgan is a tool that logs when routes are hit on the server side
+
 TODO
 
 Thanks for the great course, as usual :P
@@ -172,7 +174,7 @@ Some bugs I found...
 
 50 fix the cama thing with the pictrure seeder, trailing camas
 
-51 dates dont match because of timezones
+51 dates dont match because of time
 
 Use the JavaScript Internationalization API.
 

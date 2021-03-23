@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 //allows you to change colors of output to terminal
 import colors from "colors";
+import morgan from "morgan";
 
 //routes
 import productRoutes from "./routes/productRoutes.js";
@@ -18,6 +19,11 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 dotenv.config();
 connectDB();
 const app = express();
+
+//only run morgan in development
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 //this will allow us to accept json data in the body
 app.use(express.json());
