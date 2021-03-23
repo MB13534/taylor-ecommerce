@@ -21,8 +21,9 @@ body {
 }
 
 .rabbit-background {
-  background: #f3969a;
-  height: 100px;
+  /* background: #f3969a; */
+  background: black;
+  height: 100vh;
   width: 100vw;
   position: absolute;
   top: 5px;

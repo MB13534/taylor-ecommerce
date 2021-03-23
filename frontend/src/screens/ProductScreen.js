@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 //components
 import ControlledCarousel from "../components/ControlledCarousel";
 import Message from "../components/Message";
-import BunnyLoader from '../components/BunnyLoader'
+import BunnyLoader from "../components/BunnyLoader";
 
 //action creators
 import { listProductDetails } from "../actions/productActions";
@@ -45,7 +45,7 @@ const ProductScreen = ({ match, history }) => {
 
   //add to cart button function
   const handleAddToCart = () => {
-    dispatch(addToCart(product._id, qty));
+    dispatch(addToCart(product._id, Number(qty)));
     //bring the user to the cart page
     history.push("/cart");
   };
@@ -57,7 +57,9 @@ const ProductScreen = ({ match, history }) => {
         Go Back to the Shop
       </Link>
       {/* check to see if the item is still loading, check for error, if not, render the product */}
-      {loading ? <BunnyLoader /> : error ? (
+      {loading ? (
+        <BunnyLoader />
+      ) : error ? (
         <Message variant="danger">
           <h3>{error}</h3>
         </Message>

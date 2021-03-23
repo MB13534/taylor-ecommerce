@@ -67,15 +67,12 @@ Thanks for the great course, as usual :P
 
 Some bugs I found...
 
-1. You forgot to implement cart reset after order is submited, the cart stays with the items even if the order submited and payed,
 
-2. The search box, when you press the "back" button, it goes back, but the search input stays with the search value.
 
-3. The loaders.. when you used {successUpdate && ...} and {success && ...} sometimes you can see two loaders on one action (for example in the product managment page, try to delete a couple of products one after other).
 
-4. product details page reset.. when you enter a couple of different products, you can see the previous product details for a second, untill it updates with the new product details.
 
-5. Usualy only clients that bought some product should be able to rate it, not everybody.
+
+
 
 6. When you delete user, you should delete his orders also... its not makes sense to leave it.. besides you cant enter/view any of the deleted user orders...
 
@@ -87,7 +84,7 @@ Some bugs I found...
 
 10. Save address to profile, if you create an address
 
-11. Add go back to shopping buttons
+
 
 12. center some of the screens, login, shipping, payment, place order
 
@@ -119,7 +116,6 @@ Some bugs I found...
 
 25. change the product id back to _id to avoid confusion
 
-26. seperate paypal / credit card or clarify the method can be both
 
 27. figure out shipping, maybe each DB item has a weight and you can calculate shipping from that? or maybe just add it into the price and do free shipping
 
@@ -138,9 +134,7 @@ Some bugs I found...
 
 32. google, apple, facebook log-in options
 
-33. confirmation modal when deleting a user ect
 
-34. isdelivered to isshipped?
 
 35 more personal information? size, first/last name
 
@@ -148,11 +142,10 @@ Some bugs I found...
 
 37. the name in navbar doesnt change if you update the user you are currently logged in as
 
-38. $ sign on checking orders
+
 
 39 double lines on place order screen above place order
 
-40. when there are more than one dig of itemcount, it shows a leading 0 in the cart
 
 41. list new products first?
 
@@ -160,9 +153,7 @@ Some bugs I found...
 
 43 host images on a server instead of heroku
 
-44. change product delete abilities
 
-45. implement stripe
 
 46 add filters
 
@@ -174,13 +165,14 @@ Some bugs I found...
 
 50 fix the cama thing with the pictrure seeder, trailing camas
 
-51 dates dont match because of time
+51 dates dont match because of timezones
 
 52 discount codes for free shipping or discount off
 
 53 when you click a button to edit it, rerender just that item and not every item
 
-54 fix the navbar responsivness with the search bar
+
+
 
 Use the JavaScript Internationalization API.
 

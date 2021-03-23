@@ -25,7 +25,7 @@ const SearchBox = ({ history }) => {
         // variant="secondary"
         name="q"
         onChange={(e) => setKeyword(e.target.value)}
-        className="search-box__outline mr-2"
+        className="header__search-box mr-2"
         autoComplete="off"
         value={keyword}
         size="sm"

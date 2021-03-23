@@ -22,13 +22,6 @@ const Header = () => {
     dispatch(logout());
   };
 
-  const adminDropdownTitle = (
-    <span>
-      <i className="fas fa-user mr-1 header__responsive-icon"></i>{" "}
-      <span className="header__responsive-text">{userInfo.name}</span>{" "}
-    </span>
-  );
-
   return (
     <header>
       <Navbar
@@ -72,7 +65,18 @@ const Header = () => {
               {/* if the user is logged in, show name and drop down menu */}
               {userInfo ? (
                 //user name
-                <NavDropdown title={adminDropdownTitle} id="username">
+                //renders an icon and the name if there is a user, the icon and text is responsive
+                <NavDropdown
+                  title={
+                    <span>
+                      <i className="fas fa-user mr-1 header__responsive-icon"></i>{" "}
+                      <span className="header__responsive-text">
+                        {userInfo.name}
+                      </span>{" "}
+                    </span>
+                  }
+                  id="username"
+                >
                   {/* uprofile link */}
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>

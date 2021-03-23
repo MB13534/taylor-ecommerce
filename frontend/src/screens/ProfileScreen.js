@@ -156,7 +156,7 @@ const ProfileScreen = ({ location, history }) => {
                     {/* only want the first 10 characters of the date string */}
                     {order.createdAt.substring(0, 10)}
                   </td>
-                  <td>{order.totalPrice}</td>
+                  <td>{order.totalPrice.toFixed(2)}</td>
                   {/* is paid */}
                   <td>
                     {order.isPaid ? (
