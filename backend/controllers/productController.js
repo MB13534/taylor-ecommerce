@@ -8,6 +8,12 @@ import Product from "../models/productModel.js";
 // @route     GET /api/products/
 // @access    public
 export const getProducts = asyncHandler(async (req, res) => {
+  let filter = req.query.filter.toLowerCase();
+  if (filter === "title") {
+    filter = "name";
+  } else if (filter === "gender") {
+    filter = "sex";
+  }
   //this is how many products we want to appear on one page
   // const pageSize = 50;
   const pageSize = Number(req.query.pageSize);
@@ -17,7 +23,7 @@ export const getProducts = asyncHandler(async (req, res) => {
   //if there is, instead of returning all the products, we will narrow it down
   const keyword = req.query.keyword
     ? {
-        name: {
+        [filter]: {
           $regex: req.query.keyword,
           //'i' is case insensitive
           $options: "i",

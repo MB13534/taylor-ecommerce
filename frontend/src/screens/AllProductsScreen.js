@@ -17,6 +17,8 @@ import Paginate from "../components/Paginate";
 const AllProductsScreen = ({ match }) => {
   //check to see if there is a search param
   const keyword = match.params.keyword;
+  //check to see if there is a search param
+  const filter = match.params.filter;
   //checks to see if the result was split by pagination
   const pageNumber = match.params.pageNumber || 1;
   //to use disatch you must define and call it
@@ -37,8 +39,8 @@ const AllProductsScreen = ({ match }) => {
   useEffect(() => {
     //fire off the listProducts action creator to fetch all the products
     //will also account for narrowing down the results if there is a keyword
-    dispatch(listProducts(keyword, pageNumber, pageSize));
-  }, [dispatch, keyword, pageNumber, pageSize]);
+    dispatch(listProducts(keyword, pageNumber, pageSize, filter));
+  }, [dispatch, keyword, pageNumber, pageSize, filter]);
 
   return (
     <>
@@ -55,12 +57,13 @@ const AllProductsScreen = ({ match }) => {
         </Message>
       ) : (
         <>
-          <h1>Latest Products</h1>
+          <h1>Latest Products {keyword && keyword}</h1>
           {products.length === 0 && (
             <div>No items found. Check back later!!</div>
           )}
           <>
             <Paginate
+              filter={filter}
               pages={pages}
               page={page}
               keyword={keyword ? keyword : ""}

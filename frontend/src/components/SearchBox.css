@@ -4,6 +4,19 @@
     0px 0px 8px rgba(243, 150, 154, 0.5);
 }
 
+.header__select {
+  margin-left: -25px;
+  border: none;
+  padding: 0px 8px;
+  cursor: pointer;
+}
+
+.header__select:focus {
+  background-color: white;
+  border: none;
+  box-shadow: none;
+}
+
 @media (max-width: 1200px) {
   .header__search-box {
     width: 300px !important;

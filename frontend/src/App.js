@@ -68,17 +68,17 @@ const App = () => {
           <Route path="/admin/orderlist" component={OrderListScreen} exact />
           <Route path="/products" component={AllProductsScreen} exact />
           <Route
-            path="/products/page/:pageNumber/"
+            path="/products/page/:pageNumber/:filter"
             component={AllProductsScreen}
             exact
           />
           <Route
-            path="/products/search/:keyword/"
+            path="/products/search/:keyword/:filter"
             component={AllProductsScreen}
             exact
           />
           <Route
-            path="/products/search/:keyword/page/:pageNumber/"
+            path="/products/search/:keyword/page/:pageNumber/:filter"
             component={AllProductsScreen}
             exact
           />

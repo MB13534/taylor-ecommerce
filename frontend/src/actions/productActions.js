@@ -29,7 +29,8 @@ import { logout } from "./userActions";
 export const listProducts = (
   keyword = "",
   pageNumber = "",
-  pageSize = ""
+  pageSize = "",
+  filter = ""
 ) => async (dispatch) => {
   try {
     //immediatly dispatch the action request to update state to product = [] and loading = true
@@ -37,7 +38,7 @@ export const listProducts = (
 
     //data is pages, product, and the page
     const { data } = await axios.get(
-      `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}&filter=${filter}`
     );
     //after successfuling fetching the data dispatch action request success to update loading to false and product to action.payload
     dispatch({

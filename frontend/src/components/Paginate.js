@@ -1,7 +1,7 @@
 import { Pagination } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-const Paginate = ({ pages, page, isAdmin = false, keyword = "" }) => {
+const Paginate = ({ filter, pages, page, isAdmin = false, keyword = "" }) => {
   //only show the links if there is more than one page
   return (
     pages > 1 && (
@@ -13,8 +13,8 @@ const Paginate = ({ pages, page, isAdmin = false, keyword = "" }) => {
             to={
               !isAdmin
                 ? keyword
-                  ? `/products/search/${keyword}/page/${x + 1}`
-                  : `/products/page/${x + 1}`
+                  ? `/products/search/${keyword}/page/${x + 1}/${filter}`
+                  : `/products/page/${x + 1}/${filter}`
                 : `/admin/productlist/${x + 1}`
             }
           >
