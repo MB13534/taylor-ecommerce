@@ -10,6 +10,7 @@ import { PayPalButton } from "react-paypal-button-v2";
 import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
 import Meta from "../components/Meta";
+import ConfirmationModal from "../components/ConfirmationModal";
 
 //actions
 import { getOrderDetails, payOrder, shipOrder } from "../actions/orderActions";
@@ -19,6 +20,13 @@ import { ORDER_PAY_RESET, ORDER_SHIP_RESET } from "../constants/orderConstants";
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
+
+  //functionality for the mark to shipped modal confirmation
+  const [showShip, setShowShip] = useState(false);
+  const handleCloseShip = () => setShowShip(false);
+  const handleShowShip = (orderId) => {
+    setShowShip(true);
+  };
 
   //ebay sdk
   const [sdkReady, setSdkReady] = useState(false);
@@ -238,7 +246,7 @@ const OrderScreen = ({ match, history }) => {
                 order.isPaid &&
                 !order.isShipped && (
                   <ListGroup.Item>
-                    <Button block onClick={shipHandler}>
+                    <Button block onClick={handleShowShip}>
                       Mark as Shipped
                     </Button>
                   </ListGroup.Item>
@@ -247,6 +255,18 @@ const OrderScreen = ({ match, history }) => {
           </Card>
         </Col>
       </Row>
+      <ConfirmationModal
+        show={showShip}
+        onHide={handleCloseShip}
+        confirmHandler={shipHandler}
+        title="Mark as Shipped"
+        body="Are you sure you want to mark this item as shipped?"
+        cancelButton="Cancel"
+        cancelButtonColor="primary"
+        confirmButton="Ship"
+        confirmButtonColor="secondary"
+        id={orderId}
+      />
     </>
   );
 };
