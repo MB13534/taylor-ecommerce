@@ -63,13 +63,29 @@ morgan is a tool that logs when routes are hit on the server side
 
 custom page titles and meta tabs with helmet
 
+to deploy, run npm run build in front directory
+under server.js add:
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API IS RUNNING......");
+  });
+}
+ in the front json
+  "homepage": "http://MB13534.github.io/taylor-ecommerce",
+
+
+
 fill in meta trailing
 
 TODO
 
-Thanks for the great course, as usual :P
 
-Some bugs I found...
 
 
 1. NUMBER OF SUBTOTAL ITEMS IS STILL INCORRECT
@@ -85,6 +101,8 @@ Some bugs I found...
 6. add subcolor and subcategory to search results
 
 7 email should not be case sensitive
+
+8 apply a search through results feature, it is super fast
 
 
 

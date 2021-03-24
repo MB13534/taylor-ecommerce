@@ -1,7 +1,6 @@
 {
   "name": "frontend",
   "proxy": "http://localhost:5000",
-  "homepage": "http://MB13534.github.io/taylor-ecommerce",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

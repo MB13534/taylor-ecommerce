@@ -39,6 +39,11 @@ app.use("/api/orders", orderRoutes);
 
 app.use("/api/upload", uploadRoutes);
 
+//special route to access the paypal client id
+app.get("/api/config/paypal", (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 //we need to make the uploads folder static so the files are accessible on deploy
 //use path module to point to current directory (__dirname is only available with common JS modules, not ES6)
 //we can mimic this syntax by using path.resolve()
@@ -46,21 +51,22 @@ app.use("/api/upload", uploadRoutes);
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-//special route to access the paypal client id
-app.get("/api/config/paypal", (req, res) =>
-  res.send(process.env.PAYPAL_CLIENT_ID)
-);
+const root = path.join(__dirname, "frontend", "build");
+//added /taylor-ecommerce/ because of the < bug
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(root));
+  app.get("*", (req, res) => res.sendFile("index.html", { root }));
+} else {
+  app.get("/", (req, res) => {
+    res.send("API IS RUNNING......");
+  });
+}
 
 //if the route was not found, respond with a 404 not found
 app.use(notFound);
 
 //overwriting the default error handler
 app.use(errorHandler);
-
-//if port 5000 receives a get request to '/', respond with
-app.get("/", (req, res) => {
-  res.send("API IS RUNNING");
-});
 
 const PORT = process.env.PORT || 5000;
 app.listen(
