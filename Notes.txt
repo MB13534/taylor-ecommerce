@@ -87,7 +87,7 @@ TODO
 
 
 
-
+1 WTF IS GOING ON WITH THE PAYPAL BUTTON
 1. NUMBER OF SUBTOTAL ITEMS IS STILL INCORRECT
 
 2. have user set pagination number
@@ -105,6 +105,10 @@ TODO
 8 apply a search through results feature, it is super fast
 
 9. when you hit enter after the navbar the form should go away
+
+10. infinite loop when you try to click an unpaid order as an admins
+
+11./ add a confirmation modal for shipping
 
 
 

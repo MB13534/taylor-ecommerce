@@ -186,6 +186,13 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
     });
+    //since the user might update their name, the navbar will be affected and must be reloaded
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    });
+    //update local storage
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     //if there is an error
     dispatch({
