@@ -8,6 +8,7 @@ import axios from "axios";
 import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
 import FormContainer from "../components/FormContainer";
+import Meta from "../components/Meta";
 
 //actions
 import { listProductDetails, updateProduct } from "../actions/productActions";
@@ -314,6 +315,7 @@ const ProductEditScreen = ({ match, history }) => {
           </Form>
         )}
       </FormContainer>
+      <Meta title="Tailored by Tay - Edit Product" />
     </>
   );
 };

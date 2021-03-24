@@ -166,3 +166,11 @@ export const updateProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 });
+
+// @desc      get a specific product
+// @route     GET /api/products/featured
+// @access    public
+export const getFeaturedProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ price: -1 }).limit(10);
+  res.json(products);
+});

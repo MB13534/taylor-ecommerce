@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
 import FormContainer from "../components/FormContainer";
+import Meta from "../components/Meta";
 
 //actions
 import { login } from "../actions/userActions";
@@ -42,6 +43,7 @@ const LoginScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
+      <Meta title="Tailored by Tay - Login" />
       <h1>Sign In</h1>
       {/* check to see if the action is still loading or has an error  */}
       {error && <Message variant="danger">{error}</Message>}

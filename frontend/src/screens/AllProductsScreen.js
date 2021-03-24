@@ -13,6 +13,7 @@ import Product from "../components/Product";
 import BunnyLoader from "../components/BunnyLoader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
+import Meta from "../components/Meta";
 
 const AllProductsScreen = ({ match }) => {
   //check to see if there is a search param
@@ -44,6 +45,7 @@ const AllProductsScreen = ({ match }) => {
 
   return (
     <>
+      <Meta title="Tailored by Tay - Shopping" />
       {/* check the loading state to, loading icon if its loading, , check for error and render all the product cards if it is not */}
       {loading ? (
         //<Loader />
@@ -67,7 +69,9 @@ const AllProductsScreen = ({ match }) => {
             <h2>There are currently no items. Please check back later!</h2>
           )}
           {!keyword && count !== 0 && (
-            <h2>There are currently {count} items. Enjoy shopping!</h2>
+            <h2>
+              There are currently {count} items available. Happy shopping!
+            </h2>
           )}
           <>
             <Paginate

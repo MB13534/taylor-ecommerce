@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
 import FormContainer from "../components/FormContainer";
+import Meta from "../components/Meta";
 
 //actions
 import { getUserDetails, updateUser } from "../actions/userActions";
@@ -57,6 +58,7 @@ const UserEditScreen = ({ match, history }) => {
 
   return (
     <>
+      <Meta title="Tailored by Tay - Edit User" />
       <Link to="/admin/userlist" className="btn btn-outline-secondary mb-3">
         Go Back to All Users
       </Link>

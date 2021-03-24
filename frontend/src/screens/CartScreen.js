@@ -12,6 +12,7 @@ import {
 
 //components
 import Message from "../components/Message";
+import Meta from "../components/Meta";
 
 //actions
 import { addToCart, removeFromCart } from "../actions/cartActions";
@@ -40,6 +41,7 @@ const CartScreen = ({ history }) => {
 
   return (
     <>
+      <Meta title="Tailored by Tay - Cart" />
       <Link to="/products" className="btn btn-outline-secondary mb-3">
         Go Back to the Shop
       </Link>

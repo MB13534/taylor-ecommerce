@@ -9,6 +9,7 @@ import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
 import ConfirmationModal from "../components/ConfirmationModal";
 import Paginate from "../components/Paginate";
+import Meta from "../components/Meta";
 
 //actions
 import {
@@ -112,6 +113,7 @@ const ProductListScreen = ({ history, match }) => {
 
   return (
     <>
+      <Meta title="Tailored by Tay - Products" />
       <Row className="align-items-center">
         <Col>
           <h1 className="mb-0">Products</h1>

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
 import ConfirmationModal from "../components/ConfirmationModal";
+import Meta from "../components/Meta";
 
 //actions
 import { listUsers, deleteUser } from "../actions/userActions";
@@ -47,6 +48,7 @@ const UserListScreen = ({ history }) => {
 
   return (
     <>
+      <Meta title="Tailored by Tay - Users" />
       <h1>Users</h1>
       {loading ? (
         <BunnyLoader />

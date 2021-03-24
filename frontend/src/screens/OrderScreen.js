@@ -9,6 +9,7 @@ import { PayPalButton } from "react-paypal-button-v2";
 //components
 import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
+import Meta from "../components/Meta";
 
 //actions
 import { getOrderDetails, payOrder, shipOrder } from "../actions/orderActions";
@@ -99,6 +100,7 @@ const OrderScreen = ({ match, history }) => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
+      <Meta title="Tailored by Tay - Order" />
       <h1>Order {order._id}</h1>
       <Row>
         <Col md={8} className="mb-3">

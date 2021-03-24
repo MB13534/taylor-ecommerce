@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 //components
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
+import Meta from "../components/Meta";
 
 //actions
 import { savePaymentMethod } from "../actions/cartActions";
@@ -32,6 +33,7 @@ const PaymentScreen = ({ history }) => {
 
   return (
     <FormContainer>
+      <Meta title="Tailored by Tay - Payment" />
       {/* shows the progress steps, need to send props that represent current progress, this is step2 */}
       <CheckoutSteps step1 step2 step3 />
       <h1>Payment Method</h1>

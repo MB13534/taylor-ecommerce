@@ -9,6 +9,7 @@ import { listOrders } from "../actions/orderActions";
 //components
 import BunnyLoader from "../components/BunnyLoader";
 import Message from "../components/Message";
+import Meta from "../components/Meta";
 
 const OrderListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const OrderListScreen = ({ history }) => {
 
   return (
     <>
+      <Meta title="Tailored by Tay - Orders" />
       <h1>Orders</h1>
       {loading ? (
         <BunnyLoader />

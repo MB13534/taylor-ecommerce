@@ -6,6 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 //components
 import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
+import Meta from "../components/Meta";
 
 //constants // ACTIONS
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
@@ -69,6 +70,7 @@ const ProfileScreen = ({ location, history }) => {
 
   return (
     <Row>
+      <Meta title="Tailored by Tay - Profile" />
       <Col md={3}>
         <h2>User Profile</h2>
         {/* error message that pops up if the passwords do not match */}

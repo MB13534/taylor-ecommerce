@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
 import FormContainer from "../components/FormContainer";
+import Meta from "../components/Meta";
 
 //actions
 import { register } from "../actions/userActions";
@@ -51,6 +52,7 @@ const RegisterScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
+      <Meta title="Tailored by Tay - Register" />
       <h1>Sign Up</h1>
       {/* error message that pops up if the passwords do not match */}
       {message && <Message variant="danger">{message}</Message>}

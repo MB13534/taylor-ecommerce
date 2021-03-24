@@ -19,6 +19,9 @@ import {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_FAIL,
+  PRODUCT_FEATURED_REQUEST,
+  PRODUCT_FEATURED_SUCCESS,
+  PRODUCT_FEATURED_FAIL,
 } from "../constants/productConstants";
 
 //reducer takes in the initial state (default state), and an action
@@ -109,6 +112,19 @@ export const productUpdateReducer = (state = { product: {} }, action) => {
       return { loading: false, error: action.payload };
     case PRODUCT_UPDATE_RESET:
       return { product: {} };
+    default:
+      return state;
+  }
+};
+
+export const productFeaturedReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case PRODUCT_FEATURED_REQUEST:
+      return { loading: true, products: [] };
+    case PRODUCT_FEATURED_SUCCESS:
+      return { loading: false, products: action.payload };
+    case PRODUCT_FEATURED_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

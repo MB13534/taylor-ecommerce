@@ -20,6 +20,9 @@ import {
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAIL,
+  PRODUCT_FEATURED_REQUEST,
+  PRODUCT_FEATURED_SUCCESS,
+  PRODUCT_FEATURED_FAIL,
 } from "../constants/productConstants";
 
 //actions
@@ -239,6 +242,28 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     dispatch({
       type: PRODUCT_UPDATE_FAIL,
       payload: message,
+    });
+  }
+};
+
+export const listFeaturedProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_FEATURED_REQUEST });
+
+    const { data } = await axios.get(`/api/products/featured`);
+
+    dispatch({
+      type: PRODUCT_FEATURED_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    //if fail, dispatch action fail to change state to loading fail, and error
+    dispatch({
+      type: PRODUCT_FEATURED_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };

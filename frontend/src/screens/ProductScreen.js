@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ControlledCarousel from "../components/ControlledCarousel";
 import Message from "../components/Message";
 import BunnyLoader from "../components/BunnyLoader";
+import Meta from "../components/Meta";
 
 //action creators
 import { listProductDetails } from "../actions/productActions";
@@ -205,6 +206,7 @@ const ProductScreen = ({ match, history }) => {
               </ListGroup>
             </Card>
           </Col>
+          <Meta title={`${product.brand} size ${product.size}`} />
         </Row>
       )}
     </>
