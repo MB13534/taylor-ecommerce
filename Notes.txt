@@ -104,6 +104,8 @@ TODO
 
 8 apply a search through results feature, it is super fast
 
+9. when you hit enter after the navbar the form should go away
+
 
 
 6. When you delete user, you should delete his orders also... its not makes sense to leave it.. besides you cant enter/view any of the deleted user orders...

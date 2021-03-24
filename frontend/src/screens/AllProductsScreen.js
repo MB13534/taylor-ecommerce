@@ -96,6 +96,7 @@ const AllProductsScreen = ({ match }) => {
               ))}
             </Row>
             <Paginate
+              filter={filter}
               pages={pages}
               page={page}
               keyword={keyword ? keyword : ""}
