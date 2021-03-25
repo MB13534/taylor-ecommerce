@@ -30,7 +30,8 @@ const App = () => {
   return (
     <Router basename={routerBaseName}>
       <Header />
-      <main className="py-3">
+      <main>
+        <Route path="/" component={HomeScreen} exact />
         <Container>
           <Route path="/login" component={LoginScreen} exact />
           <Route path="/shipping" component={ShippingScreen} exact />
@@ -82,7 +83,6 @@ const App = () => {
             component={AllProductsScreen}
             exact
           />
-          <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>
       <Footer />

@@ -15,3 +15,21 @@ footer strong {
 footer strong:hover {
   color: white;
 }
+
+.footer__social-icons {
+  padding: 1rem 0;
+}
+
+.footer__social-icon {
+  color: white;
+  font-size: 2rem;
+  margin-right: 1.5rem;
+}
+
+.footer__social-icons a:last-of-type i {
+  margin-right: 0;
+}
+
+.footer__social-icon:hover {
+  opacity: 0.7;
+}

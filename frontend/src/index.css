@@ -3,13 +3,15 @@
   --font-title-gray: #5a5a5a;
 }
 
+html {
+}
+
 body {
   background-color: var(--background-light);
 }
 
 main {
-  margin-top: 70px;
-  min-height: 90vh;
+  margin-top: 69px;
 }
 
 .centered {

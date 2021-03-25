@@ -1,0 +1,9 @@
+.about-taylor__full-container {
+  background-color: var(--light);
+  height: 1000px;
+}
+
+.about-taylor__main-container {
+  background-color: red;
+  height: 1000px;
+}
