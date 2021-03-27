@@ -109,3 +109,55 @@ figure {
   font-weight: 300;
   font-size: 50px;
 }
+
+@media (max-width: 1000px) {
+  .welcome-box {
+    width: 45%;
+    padding: 15px;
+  }
+  .welcome-box h2,
+  .welcome-box h1 {
+    font-size: 24px;
+    line-height: 3rem;
+    letter-spacing: 3px;
+  }
+}
+
+@media (max-width: 900px) {
+  .welcome-box {
+    width: 40%;
+    padding: 12px;
+  }
+  .welcome-box h2,
+  .welcome-box h1 {
+    font-size: 20px;
+    line-height: 2rem;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 580px) {
+  .welcome-box {
+    width: 35%;
+    padding: 10px;
+  }
+  .welcome-box h2,
+  .welcome-box h1 {
+    font-size: 16px;
+    line-height: 1.5rem;
+    letter-spacing: 1.5px;
+  }
+}
+
+@media (max-width: 500px) {
+  .welcome-box {
+    width: 30%;
+    padding: 7px 10px;
+  }
+  .welcome-box h2,
+  .welcome-box h1 {
+    font-size: 15px;
+    line-height: 1.3rem;
+    letter-spacing: 1.5px;
+  }
+}

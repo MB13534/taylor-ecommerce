@@ -120,7 +120,6 @@ const UserListScreen = ({ history }) => {
               id={modalItemId}
             />
           </Table>
-          ;
         </>
       )}
     </>

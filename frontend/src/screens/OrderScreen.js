@@ -107,11 +107,11 @@ const OrderScreen = ({ match, history }) => {
   ) : error ? (
     <Message variant="danger">{error}</Message>
   ) : (
-    <>
+    <div className="order-screen">
       <Meta title="Tailored by Tay - Order" />
       <h1>Order {order._id}</h1>
       <Row>
-        <Col md={8} className="mb-3">
+        <Col lg={8} className="mb-3">
           <ListGroup variant="flush">
             {/* shipping confirmation */}
             <ListGroup.Item>
@@ -164,7 +164,7 @@ const OrderScreen = ({ match, history }) => {
                   {order.orderItems.map((item) => (
                     <ListGroup.Item key={item.product}>
                       <Row className="d-flex align-items-center">
-                        <Col md={2} className="pl-0 pr-0">
+                        <Col md={2} className="pl-0 pr-0 order-screen__image">
                           <Image
                             src={item.images[0]}
                             alt={item.name}
@@ -189,7 +189,7 @@ const OrderScreen = ({ match, history }) => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={4}>
+        <Col lg={4}>
           <Card className="shadow">
             <ListGroup variant="flush">
               <ListGroup.Item>
@@ -267,7 +267,7 @@ const OrderScreen = ({ match, history }) => {
         confirmButtonColor="secondary"
         id={orderId}
       />
-    </>
+    </div>
   );
 };
 

@@ -217,3 +217,23 @@ const formatter = new Intl.NumberFormat('en-US', {
  
 formatter.format(1000) // $1,000.00
 
+
+
+<div class="element">Front-end Developer</div>
+              <div class="element">Sommelier</div>
+              <div class="element">Athlete</div>
+              <div class="element">ReactJS Coder</div>
+              <div class="element">Accomplished Restaurant GM</div>
+              <div class="element">Outdoors Enthusiast</div>
+
+              () => mb
+              <i class="fas fa-home"></i>
+              <i class="far fa-user"></i>
+              <i class="fas fa-briefcase"></i>
+              <i class="far fa-envelope"></i>
+      https://github.com/MB13534
+      <i class="fab fa-github"></i>
+      https://www.linkedin.com/in/barrymj/
+      <i class="fab fa-linkedin-in"></i>
+
+      <i class="far fa-file"></i>

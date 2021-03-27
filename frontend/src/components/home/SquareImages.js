@@ -1,4 +1,4 @@
-import { Container, Row, Col, Image } from "react-bootstrap";
+// import { Container, Row, Col, Image } from "react-bootstrap";
 
 //CSS
 import "./SquareImages.css";
@@ -6,7 +6,7 @@ import "./SquareImages.css";
 const SquareImages = () => {
   return (
     <div className="gallery">
-      <div class="welcome-box">
+      <div className="welcome-box">
         <h2>Welcome to my shop!</h2>
         <h1>Tailored by Tay</h1>
       </div>

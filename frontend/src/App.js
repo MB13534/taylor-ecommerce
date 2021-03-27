@@ -30,7 +30,7 @@ const App = () => {
   return (
     <Router basename={routerBaseName}>
       <Header />
-      <main>
+      <main className="py-3">
         <Route path="/" component={HomeScreen} exact />
         <Container>
           <Route path="/login" component={LoginScreen} exact />

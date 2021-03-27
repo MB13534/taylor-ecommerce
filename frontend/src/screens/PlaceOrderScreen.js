@@ -74,7 +74,7 @@ const PlaceOrderScreen = ({ history }) => {
   };
 
   return (
-    <>
+    <div className="place-order-screen">
       <Meta title="Tailored by Tay - Place Order" />
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
@@ -109,7 +109,10 @@ const PlaceOrderScreen = ({ history }) => {
                   {cart.cartItems.map((item) => (
                     <ListGroup.Item key={item.product}>
                       <Row className="d-flex align-items-center">
-                        <Col md={2} className="pl-0 pr-0">
+                        <Col
+                          md={2}
+                          className="pl-0 pr-0 place-order-screen__image"
+                        >
                           <Image
                             src={item.images[0]}
                             alt={item.name}
@@ -187,7 +190,7 @@ const PlaceOrderScreen = ({ history }) => {
           </Card>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 
